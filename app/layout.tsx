@@ -1,14 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -105,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} ${brandMont.variable} ${brandEspera.variable} ${brandNoName.variable} ${brandBarq.variable} ${brandCircula.variable} ${brandIdentidad.variable} ${brandStark.variable} ${brandSantana.variable} ${brandGenerica.variable}`}
+      className={`${inter.variable} ${jetbrains.variable} ${brandMont.variable} ${brandEspera.variable} ${brandNoName.variable} ${brandBarq.variable} ${brandCircula.variable} ${brandIdentidad.variable} ${brandStark.variable} ${brandSantana.variable} ${brandGenerica.variable}`}
     >
       <body className="bg-bg font-sans text-[16px] leading-relaxed text-ink">
         <a href="#main" className="skip-link">
