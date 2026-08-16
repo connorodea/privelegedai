@@ -32,33 +32,33 @@ export function Security() {
           title="The checklist your IT auditor will run."
           lede="Every domain is engineered in from the infrastructure layer — not retrofitted via policy."
         />
-        <div className="mt-10 overflow-hidden rounded-[14px] border border-line">
+        <div className="mt-10 overflow-hidden rounded-lg border border-line">
           <div className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line bg-bg3 max-[750px]:hidden">
-            <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted">
+            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
               Domain
             </div>
-            <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted">
+            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
               Implementation
             </div>
-            <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted">
+            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
               Legal / compliance value
             </div>
           </div>
           {ROWS.map((row) => (
             <div
               key={row.domain}
-              className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line text-[13.5px] last:border-b-0 max-[750px]:grid-cols-1"
+              className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line text-[13px] last:border-b-0 max-[750px]:grid-cols-1"
             >
               <div className="px-5 py-4 max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                <span className="hidden font-mono text-[10.5px] tracking-[0.06em] uppercase text-muted max-[750px]:inline">
+                <span className="hidden font-mono text-[10.5px] uppercase tracking-[0.06em] text-muted max-[750px]:inline">
                   {row.domain}:{" "}
                 </span>
-                <span className="font-semibold text-ink">{row.domain}</span>
+                <span className="font-medium text-ink">{row.domain}</span>
               </div>
               <div className="px-5 py-4 text-muted max-[750px]:px-[18px] max-[750px]:py-[14px]">
                 {row.impl}
               </div>
-              <div className="px-5 py-4 text-[13px] text-accent max-[750px]:px-[18px] max-[750px]:py-[14px]">
+              <div className="px-5 py-4 text-accent max-[750px]:px-[18px] max-[750px]:py-[14px]">
                 {row.value}
               </div>
             </div>

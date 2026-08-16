@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #08090B;
-  --color-bg2: #0E1014;
-  --color-bg3: #14161C;
-  --color-surface: #111318;
-  --color-surface2: #161922;
-  --color-line: rgba(255, 255, 255, 0.06);
-  --color-line2: rgba(255, 255, 255, 0.10);
-  --color-ink: #E4E0D8;
-  --color-muted: #8B867E;
-  --color-faint: #5C5852;
-  --color-accent: #2EE6A6;
-  --color-accent-dim: #17B87F;
-  --color-indigo: #6366F1;
-  --color-gold: #D4A843;
-  --color-accent-ink: #041812;
+  --color-bg: #050507;
+  --color-bg2: #0B0C0E;
+  --color-bg3: #101114;
+  --color-surface: #0C0D10;
+  --color-surface2: #131418;
+  --color-line: rgba(255, 255, 255, 0.07);
+  --color-line2: rgba(255, 255, 255, 0.12);
+  --color-ink: #EDEDE8;
+  --color-muted: #9B968C;
+  --color-faint: #6A655C;
+  --color-accent: #5CE68F;
+  --color-accent-dim: #2BB36A;
+  --color-violet: #8B7CFF;
+  --color-blue: #54B2FD;
+  --color-amber: #FDCB59;
+  --color-accent-ink: #03130B;
 
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
   --font-brand: var(--font-brand-mont), var(--font-inter), sans-serif;
 
-  --radius-card: 14px;
+  --radius-card: 8px;
 }
 
 html {
@@ -40,24 +41,6 @@ body {
 }
 
 @layer components {
-  .skip-link {
-    position: fixed;
-    top: -100px;
-    left: 16px;
-    z-index: 100;
-    padding: 12px 20px;
-    border-radius: 9999px;
-    background: var(--color-accent);
-    color: var(--color-accent-ink);
-    font-size: 14px;
-    font-weight: 600;
-    transition: top 200ms ease;
-  }
-
-  .skip-link:focus-visible {
-    top: 16px;
-  }
-
   .wrap {
     @apply mx-auto max-w-[1120px] px-6;
   }
@@ -65,31 +48,43 @@ body {
   .btn,
   .btn-primary,
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full border border-transparent px-[22px] py-[11px] font-sans text-sm font-semibold whitespace-nowrap transition-all duration-200;
+    @apply inline-flex items-center gap-2 rounded-full border border-transparent px-5 py-2.5 font-sans text-[13px] font-semibold whitespace-nowrap transition-all duration-150;
   }
 
   .btn-primary {
-    @apply bg-accent text-accent-ink hover:-translate-y-px hover:bg-[#57F0BC];
+    @apply bg-accent text-accent-ink hover:bg-[#7DF5A8];
   }
 
   .btn-ghost {
-    @apply border-line2 text-ink hover:border-muted hover:bg-surface;
+    @apply border-line2 text-ink hover:border-white/25 hover:bg-surface;
   }
 
   .kicker {
-    @apply mb-[18px] font-mono text-xs tracking-[0.14em] uppercase text-accent;
+    @apply mb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-accent;
   }
 
   .section {
-    @apply border-t border-line py-[100px];
+    @apply border-t border-line py-20 md:py-24;
   }
 
   .card {
-    @apply rounded-[14px] border border-line bg-surface p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-line2 hover:bg-surface2;
+    @apply rounded-lg border border-line bg-surface p-6 transition-colors duration-150 hover:border-line2 hover:bg-surface2;
   }
 
   .card-icon {
-    @apply mb-[18px] h-8 w-8 text-accent;
+    @apply mb-4 h-6 w-6 text-accent;
+  }
+
+  .hairline {
+    @apply border-line bg-line;
+  }
+
+  .term-window {
+    @apply overflow-hidden rounded-lg border border-line2 bg-bg3;
+  }
+
+  .term-body {
+    @apply p-4 font-mono text-[12.5px] leading-[1.8] text-muted;
   }
 }
 

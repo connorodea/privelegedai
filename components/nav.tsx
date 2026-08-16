@@ -3,44 +3,44 @@ import { Logo } from "./logo";
 import { Button } from "./ui";
 
 const LINKS = [
-  { href: "/#product", label: "Product", hideBelow: "min-[800px]" },
-  { href: "/#security", label: "Security", hideBelow: "min-[800px]" },
-  { href: "/#architecture", label: "Architecture", hideBelow: "min-[800px]" },
-  { href: "/pricing", label: "Pricing", hideBelow: "min-[480px]" },
-  { href: "/docs", label: "Docs", hideBelow: "min-[480px]" },
+  { href: "/#product", label: "Product" },
+  { href: "/#security", label: "Security" },
+  { href: "/#architecture", label: "Architecture" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/docs", label: "Docs" },
 ];
 
 export function Nav() {
   return (
     <nav
       aria-label="Main"
-      className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md"
+      className="sticky top-0 z-50 border-b border-line bg-bg/80 backdrop-blur-xl"
     >
-      <div className="wrap flex h-[66px] items-center justify-between">
+      <div className="wrap flex h-16 items-center justify-between">
         <Link
           href="/"
           aria-label="Privileged home"
-          className="font-serif text-xl font-medium tracking-[-0.01em]"
+          className="flex items-center gap-2"
         >
-          <Logo className="text-[22px]" />
+          <Logo className="text-[19px] tracking-[-0.01em]" />
         </Link>
-        <div className="flex items-center gap-4 min-[480px]:gap-5 min-[800px]:gap-7">
+        <div className="hidden items-center gap-7 sm:flex">
           {LINKS.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              className={`hidden ${l.hideBelow}:inline text-[13.5px] text-muted transition-colors hover:text-ink`}
+              className="text-[13px] text-muted transition-colors hover:text-ink"
             >
               {l.label}
             </Link>
           ))}
-          <Button
-            href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Early%20Access"
-            className="px-[18px] py-2 text-[13px]"
-          >
-            Request access
-          </Button>
         </div>
+        <Button
+          href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Early%20Access"
+          className="px-4 py-1.5 text-[12.5px]"
+        >
+          Request access
+        </Button>
       </div>
     </nav>
   );

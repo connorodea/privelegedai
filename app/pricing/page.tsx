@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Button, Card, Kicker, SectionHeading } from "@/components/ui";
+import { Button, Kicker } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Pricing — Privileged",
@@ -89,7 +89,7 @@ function Check() {
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden="true"
-      className="mt-[3px] h-[15px] w-[15px] shrink-0 text-accent"
+      className="mt-[2px] h-4 w-4 shrink-0 text-accent"
     >
       <path
         d="M2.75 8.5l3.25 3.25L13.25 4.5"
@@ -119,6 +119,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <path d="M20 12a8 8 0 1 1-2.34-5.66" />
         <path d="M20 3v5h-5" />
@@ -137,6 +138,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <circle cx="12" cy="12" r="9" />
         <path d="m5.6 5.6 12.8 12.8" />
@@ -155,6 +157,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <circle cx="12" cy="12" r="9" />
         <path d="M3 12h18" />
@@ -174,6 +177,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
         <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
@@ -192,6 +196,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <rect x="5" y="3" width="14" height="18" rx="2" />
         <path d="m9 13 2 2 4-4" />
@@ -210,6 +215,7 @@ const INCLUDED: {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
+        className="h-5 w-5"
       >
         <rect x="6" y="6" width="12" height="12" rx="2" />
         <rect x="9.5" y="9.5" width="5" height="5" />
@@ -224,36 +230,54 @@ export default function Pricing() {
     <>
       <Nav />
       <main id="main">
-        <section className="wrap pb-[64px] pt-[110px]">
+        <section className="wrap pb-16 pt-[110px]">
           <Kicker>Pricing</Kicker>
-          <h1 className="max-w-[18ch] font-serif text-[clamp(34px,5vw,54px)] leading-[1.08] font-normal tracking-[-0.015em]">
+          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em]">
             Simple by design.
           </h1>
-          <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-muted">
+          <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
             Early access is limited to a small set of firms. No minimum spend.
             One DPA covers everything — every model, every feed, every tier.
           </p>
         </section>
 
         <section className="wrap pb-[100px]">
-          <div className="grid grid-cols-1 gap-4 min-[900px]:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 min-[900px]:grid-cols-3">
             {TIERS.map((t) => (
-              <div key={t.name} className="card flex flex-col">
-                <h3 className="font-serif text-[19px] font-medium">{t.name}</h3>
-                <div className="mt-3">
-                  <span className="font-serif text-[26px] leading-[1.1] text-ink">
+              <div
+                key={t.name}
+                className={`flex flex-col rounded-lg border bg-surface p-6 transition-colors duration-150 hover:bg-surface2 ${
+                  t.name === "Firm"
+                    ? "border-accent/40 hover:border-accent/60"
+                    : "border-line hover:border-line2"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="font-mono text-[11px] tracking-[0.14em] text-faint uppercase">
+                    {t.name}
+                  </h3>
+                  {t.name === "Firm" ? (
+                    <span className="font-mono text-[10px] tracking-[0.14em] text-accent uppercase">
+                      Built for firms
+                    </span>
+                  ) : null}
+                </div>
+                <div className="mt-3 flex items-baseline">
+                  <span className="font-mono text-[22px] leading-none text-ink">
                     {t.price}
                   </span>
-                  <span className="ml-2 text-sm text-muted">{t.priceNote}</span>
+                  <span className="ml-2.5 text-[12px] text-muted">
+                    {t.priceNote}
+                  </span>
                 </div>
-                <p className="mt-3 text-sm leading-[1.65] text-muted">
+                <p className="mt-2 text-[13px] leading-[1.6] text-muted">
                   {t.blurb}
                 </p>
-                <ul className="mt-6 flex-1 space-y-[10px] border-t border-line pt-6">
+                <ul className="mt-5 flex-1 space-y-2.5">
                   {[...t.features, ...(t.extra ?? [])].map((f) => (
                     <li
                       key={f}
-                      className="flex items-start gap-2.5 text-sm text-muted"
+                      className="flex items-start gap-2.5 text-[13px] text-muted"
                     >
                       <Check />
                       <span>{f}</span>
@@ -265,7 +289,7 @@ export default function Pricing() {
                     t.subject,
                   )}`}
                   variant={t.variant}
-                  className="mt-8 w-full justify-center"
+                  className="mt-6 w-full justify-center"
                 >
                   {t.cta}
                 </Button>
@@ -274,34 +298,48 @@ export default function Pricing() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="border-t border-line py-20 md:py-24">
           <div className="wrap">
-            <SectionHeading
-              kicker="Included everywhere"
-              title="What's included in every tier"
-              lede="The guarantees that matter to procurement and IT hold across the board — no tier gates on security."
-            />
-            <div className="mt-12 grid grid-cols-1 gap-4 min-[560px]:grid-cols-2 min-[900px]:grid-cols-3">
+            <Kicker>Included everywhere</Kicker>
+            <h2 className="max-w-[26ch] text-[clamp(24px,3.4vw,36px)] leading-[1.15] font-semibold tracking-[-0.03em]">
+              What's included in every tier
+            </h2>
+            <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-muted">
+              The guarantees that matter to procurement and IT hold across the
+              board — no tier gates on security.
+            </p>
+            <div className="mt-12 grid grid-cols-1 gap-3 min-[560px]:grid-cols-2 min-[900px]:grid-cols-3">
               {INCLUDED.map((c) => (
-                <Card key={c.title} icon={c.icon} title={c.title}>
-                  {c.body}
-                </Card>
+                <div
+                  key={c.title}
+                  className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
+                >
+                  <div className="mb-3 text-accent">{c.icon}</div>
+                  <h3 className="text-[14.5px] font-medium text-ink">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2 text-[13px] leading-[1.6] text-muted">
+                    {c.body}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section">
+        <section className="border-t border-line py-16">
           <div className="wrap text-center">
-            <p className="font-serif text-[24px] text-ink">Questions?</p>
-            <p className="mt-3 text-[15px] text-muted">
-              <a
-                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Contact"
-                className="text-accent hover:underline"
-              >
-                hello@privilegedinfra.com
-              </a>
+            <Kicker>Questions?</Kicker>
+            <p className="text-[13.5px] text-muted">
+              hello@privilegedinfra.com
             </p>
+            <Button
+              href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Contact"
+              variant="ghost"
+              className="mt-6"
+            >
+              Email us
+            </Button>
           </div>
         </section>
       </main>

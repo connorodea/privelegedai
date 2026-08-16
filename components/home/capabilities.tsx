@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Card, Container, SectionHeading } from "@/components/ui";
+import { Container, SectionHeading } from "@/components/ui";
 
 function CardIcon({ children }: { children: ReactNode }) {
   return (
@@ -8,7 +8,7 @@ function CardIcon({ children }: { children: ReactNode }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.6"
+      strokeWidth="1.5"
       strokeLinecap="round"
       aria-hidden="true"
     >
@@ -86,11 +86,18 @@ export function Capabilities() {
           kicker="Capabilities"
           title="Everything a firm's IT auditor asks for."
         />
-        <div className="mt-11 grid grid-cols-1 gap-4 min-[900px]:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-3 min-[900px]:grid-cols-3">
           {FEATURES.map((f) => (
-            <Card key={f.title} icon={f.icon} title={f.title}>
-              {f.body}
-            </Card>
+            <div
+              key={f.title}
+              className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
+            >
+              <div className="mb-4 h-5 w-5 text-accent">{f.icon}</div>
+              <h3 className="text-[14.5px] font-medium text-ink">{f.title}</h3>
+              <p className="mt-2 text-[13px] leading-[1.6] text-muted">
+                {f.body}
+              </p>
+            </div>
           ))}
         </div>
       </Container>

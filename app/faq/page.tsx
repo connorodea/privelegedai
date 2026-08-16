@@ -80,27 +80,36 @@ export default function Faq() {
       <main id="main">
         <section className="wrap pt-[110px] pb-[100px]">
           <Kicker>FAQ</Kicker>
-          <h1 className="max-w-[20ch] font-serif text-[clamp(34px,5vw,54px)] leading-[1.08] font-normal tracking-[-0.015em]">
+          <h1 className="max-w-[20ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em]">
             Answers for your IT auditor.
           </h1>
-          <p className="mt-5 max-w-[54ch] text-[16.5px] leading-[1.7] text-muted">
+          <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
             The questions your IT and security reviewers will raise — answered
             from the DPA and the runtime, not from marketing.
           </p>
 
-          <div className="mx-auto mt-14 max-w-[780px] space-y-4">
+          <div className="mx-auto mt-14 max-w-[780px] space-y-3">
             {FAQS.map((item) => (
-              <details key={item.q} className="group rounded-[14px] border border-line bg-surface">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-7 py-5 font-serif text-lg text-ink [&::-webkit-details-marker]:hidden">
-                  <span>{item.q}</span>
+              <details
+                key={item.q}
+                className="group rounded-lg border border-line bg-surface"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[14px] font-medium text-ink [&::-webkit-details-marker]:hidden">
+                  <span className="flex-1">{item.q}</span>
                   <span
                     aria-hidden="true"
-                    className="shrink-0 text-[20px] leading-none text-accent transition-transform duration-200 group-open:rotate-45"
+                    className="shrink-0 font-mono text-[16px] leading-none text-accent group-open:hidden"
                   >
                     +
                   </span>
+                  <span
+                    aria-hidden="true"
+                    className="hidden shrink-0 font-mono text-[16px] leading-none text-accent group-open:inline"
+                  >
+                    −
+                  </span>
                 </summary>
-                <p className="border-t border-line px-7 pt-4 pb-6 text-sm leading-relaxed text-muted">
+                <p className="px-5 pb-5 text-[13.5px] leading-[1.7] text-muted">
                   {item.a}
                 </p>
               </details>
