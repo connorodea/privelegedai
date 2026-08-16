@@ -10,14 +10,50 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-out
+          path: out/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-out
+          path: out
+
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.HETZNER_CO_SSH_KEY }}
 
-      - name: Deploy to VPS
+      - name: Sync to VPS and reload nginx
+        env:
+          HOST: ${{ secrets.HETZNER_CO_HOST }}
+          USER: ${{ secrets.HETZNER_CO_USER }}
+          APP_DIR: ${{ secrets.APP_DIR || '/var/www/privelegedai.com' }}
         run: |
-          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.HETZNER_CO_USER }}@${{ secrets.HETZNER_CO_HOST }} \
-            'cd /var/www/privelegedai.com && git pull --ff-only && nginx -t && systemctl reload nginx'
+          ssh -o StrictHostKeyChecking=accept-new "${USER}@${HOST}" "mkdir -p ${APP_DIR}"
+          rsync -az --delete -e "ssh -o StrictHostKeyChecking=accept-new" out/ "${USER}@${HOST}:${APP_DIR}/"
+          ssh -o StrictHostKeyChecking=accept-new "${USER}@${HOST}" "nginx -t && systemctl reload nginx"
