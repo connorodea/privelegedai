@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #08090B;
+  --color-bg2: #0E1014;
+  --color-bg3: #14161C;
+  --color-surface: #111318;
+  --color-surface2: #161922;
+  --color-line: rgba(255, 255, 255, 0.06);
+  --color-line2: rgba(255, 255, 255, 0.10);
+  --color-ink: #E4E0D8;
+  --color-muted: #8B867E;
+  --color-faint: #5C5852;
+  --color-accent: #2EE6A6;
+  --color-accent-dim: #17B87F;
+  --color-indigo: #6366F1;
+  --color-gold: #D4A843;
+  --color-accent-ink: #041812;
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
+  --font-brand: var(--font-brand-mont), var(--font-inter), sans-serif;
+
+  --radius-card: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+@layer components {
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 100;
+    padding: 12px 20px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-size: 14px;
+    font-weight: 600;
+    transition: top 200ms ease;
+  }
+
+  .skip-link:focus-visible {
+    top: 16px;
+  }
+
+  .wrap {
+    @apply mx-auto max-w-[1120px] px-6;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-transparent px-[22px] py-[11px] font-sans text-sm font-semibold whitespace-nowrap transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-accent-ink hover:-translate-y-px hover:bg-[#57F0BC];
+  }
+
+  .btn-ghost {
+    @apply border-line2 text-ink hover:border-muted hover:bg-surface;
+  }
+
+  .kicker {
+    @apply mb-[18px] font-mono text-xs tracking-[0.14em] uppercase text-accent;
+  }
+
+  .section {
+    @apply border-t border-line py-[100px];
+  }
+
+  .card {
+    @apply rounded-[14px] border border-line bg-surface p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-line2 hover:bg-surface2;
+  }
+
+  .card-icon {
+    @apply mb-[18px] h-8 w-8 text-accent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
