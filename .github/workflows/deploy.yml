@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.HETZNER_CO_SSH_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=accept-new ${{ secrets.HETZNER_CO_USER }}@${{ secrets.HETZNER_CO_HOST }} \
+            'cd /var/www/privelegedai.com && git pull --ff-only && nginx -t && systemctl reload nginx'
