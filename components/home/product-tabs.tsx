@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import { Card, Container, SectionHeading } from "@/components/ui";
+import { Container, SectionHeading } from "@/components/ui";
 
 function CardIcon({ children }: { children: ReactNode }) {
   return (
@@ -10,7 +10,7 @@ function CardIcon({ children }: { children: ReactNode }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.6"
+      strokeWidth="1.5"
       strokeLinecap="round"
       aria-hidden="true"
     >
@@ -177,7 +177,7 @@ export function ProductTabs() {
           lede="Run custom legal models, bundle premium data feeds, and white-label partner compute — all through a single DPA, signed in days."
         />
         <div
-          className="mt-12 flex w-fit gap-1 rounded-full bg-bg3 p-1"
+          className="mt-12 inline-flex gap-0.5 rounded-full border border-line bg-bg3 p-1"
           role="tablist"
           aria-label="Product capabilities"
         >
@@ -195,10 +195,10 @@ export function ProductTabs() {
               tabIndex={active === i ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={(e) => handleKeyDown(e, i)}
-              className={`cursor-pointer rounded-full border-none bg-transparent px-5 py-2.5 font-mono text-[13px] transition-all duration-200 ${
+              className={`cursor-pointer rounded-full px-4 py-1.5 font-mono text-[12px] transition-colors duration-150 ${
                 active === i
-                  ? "bg-surface text-ink shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
-                  : "text-muted hover:text-ink"
+                  ? "border border-line2 bg-surface2 text-ink"
+                  : "border border-transparent text-muted hover:text-ink"
               }`}
             >
               {tab.label}
@@ -212,14 +212,21 @@ export function ProductTabs() {
             role="tabpanel"
             aria-labelledby={`product-tab-${i}`}
             tabIndex={0}
-            className={`mt-8 grid grid-cols-1 gap-4 min-[900px]:grid-cols-3 ${
+            className={`mt-6 grid grid-cols-1 gap-3 min-[900px]:grid-cols-3 ${
               active === i ? "" : "hidden"
             }`}
           >
             {tab.cards.map((c) => (
-              <Card key={c.title} icon={c.icon} title={c.title}>
-                {c.body}
-              </Card>
+              <div
+                key={c.title}
+                className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
+              >
+                <div className="mb-4 h-5 w-5 text-accent">{c.icon}</div>
+                <h3 className="text-[14.5px] font-medium text-ink">{c.title}</h3>
+                <p className="mt-2 text-[13px] leading-[1.6] text-muted">
+                  {c.body}
+                </p>
+              </div>
             ))}
           </div>
         ))}

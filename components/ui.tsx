@@ -33,18 +33,22 @@ export function Card({
   icon,
   title,
   children,
+  className = "",
 }: {
   icon?: ReactNode;
   title?: string;
   children: ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="card">
+    <div className={`card ${className}`}>
       {icon ? <div className="card-icon">{icon}</div> : null}
       {title ? (
-        <h3 className="font-serif text-[19px] font-medium">{title}</h3>
+        <h3 className="text-[15px] font-semibold tracking-[-0.01em]">{title}</h3>
       ) : null}
-      <div className="mt-[10px] text-sm leading-[1.65] text-muted">{children}</div>
+      <div className="mt-2.5 text-[13.5px] leading-[1.65] text-muted">
+        {children}
+      </div>
     </div>
   );
 }
@@ -71,14 +75,14 @@ export function SectionHeading({
       <Kicker>{kicker}</Kicker>
       <h2
         id={id}
-        className="max-w-[22ch] font-serif text-[clamp(28px,4.2vw,46px)] leading-[1.1] font-normal tracking-[-0.015em]"
+        className="max-w-[26ch] text-[clamp(26px,3.6vw,40px)] leading-[1.1] font-semibold tracking-[-0.03em]"
         style={align === "center" ? { marginInline: "auto" } : undefined}
       >
         {title}
       </h2>
       {lede ? (
         <p
-          className="mt-5 max-w-[56ch] text-[16.5px] leading-[1.7] text-muted"
+          className="mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-muted"
           style={align === "center" ? { marginInline: "auto" } : undefined}
         >
           {lede}
@@ -90,8 +94,8 @@ export function SectionHeading({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="mb-[30px] inline-flex items-center gap-[9px] rounded-full border border-accent/25 px-[15px] py-[7px] font-mono text-xs tracking-[0.14em] uppercase text-accent">
-      <span className="h-[5px] w-[5px] animate-pulse rounded-full bg-accent" />
+    <span className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/5 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.14em] uppercase text-accent">
+      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
       {children}
     </span>
   );

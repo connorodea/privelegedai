@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Button, Container, Kicker, SectionHeading } from "@/components/ui";
+import { Button, Container, Kicker } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Use Cases — Privileged",
@@ -64,10 +64,10 @@ export default function UseCases() {
       <main id="main">
         <Container className="pt-24 pb-16">
           <Kicker>Use cases</Kicker>
-          <h1 className="max-w-[18ch] font-serif text-[clamp(38px,6.5vw,64px)] leading-[1.04] font-normal tracking-[-0.02em]">
+          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em]">
             Built for the legal stack.
           </h1>
-          <p className="mt-6 max-w-[56ch] text-[16.5px] leading-[1.7] text-muted">
+          <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-muted">
             Three audiences, one pre-audited guarantee. BigLaw needs ZDR and
             static-IP egress; GC offices need RAM-only inference on regulatory
             data; legal-engineering teams need hot-swappable models and premium
@@ -76,37 +76,53 @@ export default function UseCases() {
           </p>
         </Container>
 
-        {PERSONAS.map((p) => (
-          <section key={p.kicker} className="section">
+        {PERSONAS.map((p, i) => (
+          <section key={p.kicker} className="border-t border-line py-14">
             <Container>
-              <div className="grid gap-12 min-[900px]:grid-cols-2">
-                <SectionHeading
-                  kicker={p.kicker}
-                  title={p.title}
-                  lede={p.problem}
-                />
-                <div className="rounded-[14px] border border-line bg-surface p-7">
-                  <h3 className="font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted">
+              <div className="grid gap-8 min-[900px]:grid-cols-[72px_1fr]">
+                <div className="pt-1 font-mono text-[12px] text-faint">
+                  0{i + 1}
+                </div>
+                <div className="max-w-[64ch]">
+                  <div className="font-mono text-[11px] tracking-[0.14em] text-faint">
+                    {p.kicker.split(" — ")[1]}
+                  </div>
+                  <h2 className="mt-2 text-[clamp(20px,2.6vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em]">
+                    {p.title}
+                  </h2>
+                  <p className="mt-4 text-[14px] leading-[1.7] text-muted">
+                    {p.problem}
+                  </p>
+                  <div className="mt-5 font-mono text-[11px] tracking-[0.14em] uppercase text-accent">
                     How Privileged solves it
-                  </h3>
-                  <ul className="mt-5 grid gap-3.5">
+                  </div>
+                  <ul className="mt-4 grid gap-2.5">
                     {p.solves.map((s) => (
                       <li
                         key={s}
-                        className="flex items-start gap-3 text-[14.5px] leading-[1.6] text-ink"
+                        className="flex items-start gap-2.5 text-[13.5px] leading-[1.6] text-muted"
                       >
-                        <span className="mt-[2px] flex h-[18px] w-[18px] flex-none items-center justify-center rounded-full bg-accent font-mono text-[10px] text-accent-ink">
-                          ✓
-                        </span>
+                        <svg
+                          aria-hidden
+                          className="mt-[3px] h-4 w-4 flex-none text-accent"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M2.5 8.5l3.5 3.5 7.5-8" />
+                        </svg>
                         {s}
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 flex flex-wrap gap-2 border-t border-line pt-6">
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {p.chips.map((c) => (
                       <span
                         key={c}
-                        className="rounded-full border border-line px-3 py-1.5 font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted"
+                        className="inline-flex rounded-full border border-line2 px-3 py-1 font-mono text-[11px] text-muted"
                       >
                         {c}
                       </span>
@@ -118,13 +134,13 @@ export default function UseCases() {
           </section>
         ))}
 
-        <section className="section">
+        <section className="border-t border-line py-14">
           <Container className="text-center">
             <Kicker>Early access</Kicker>
-            <h2 className="mx-auto max-w-[22ch] font-serif text-[clamp(28px,4.2vw,46px)] leading-[1.1] font-normal tracking-[-0.015em]">
+            <h2 className="mx-auto max-w-[22ch] text-[clamp(22px,3vw,32px)] leading-[1.15] font-semibold tracking-[-0.03em]">
               Your workload, one DPA.
             </h2>
-            <p className="mx-auto mt-5 max-w-[46ch] text-[16.5px] leading-[1.7] text-muted">
+            <p className="mx-auto mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-muted">
               Early access is open to a limited set of law firms and
               legal-engineering teams building on specialized models and
               premium data.

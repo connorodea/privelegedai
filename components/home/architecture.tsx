@@ -74,46 +74,42 @@ export function Architecture() {
           title="Short-lived, static-egress, and gone on stream close."
           lede="Every request runs in an ephemeral container that exits through a fixed, high-availability NAT gateway. Decommissioned the instant the token stream closes."
         />
-        <div className="mt-12 rounded-[14px] border border-line bg-surface px-8 py-10">
-          <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-[14px] max-[900px]:grid-cols-1">
+        <div className="mt-12 rounded-lg border border-line bg-surface px-6 py-8">
+          <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-3 max-[900px]:grid-cols-1">
             {NODES.map((node, i) => (
               <div key={node.name} className="contents">
                 {i > 0 ? (
-                  <div className="font-mono text-base text-faint max-[900px]:rotate-90 max-[900px]:text-center">
+                  <div className="text-center font-mono text-faint max-[900px]:rotate-90">
                     →
                   </div>
                 ) : null}
                 <div
-                  className={`rounded-[10px] border p-[18px_16px] ${
+                  className={`rounded-lg border p-4 ${
                     node.highlight
-                      ? "border-accent/35 bg-accent/[0.03]"
+                      ? "border-accent/40 bg-accent/5"
                       : "border-line bg-bg2"
                   }`}
                 >
-                  <div className="font-mono text-[10.5px] tracking-[0.08em] uppercase text-muted">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-faint">
                     {node.tag}
                   </div>
-                  <div
-                    className={`mt-[6px] flex items-center gap-2 font-serif text-[17px] font-medium ${
-                      node.highlight ? "text-accent" : ""
-                    }`}
-                  >
+                  <div className="mt-1.5 flex items-center gap-2 text-[14px] font-medium text-ink">
                     {node.icon}
                     {node.name}
                   </div>
-                  <div className="mt-1 text-xs leading-[1.5] text-muted">
+                  <div className="mt-1 text-[11.5px] leading-[1.5] text-muted">
                     {node.sub}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
-            <div className="rounded-[10px] border border-dashed border-line p-[15px_16px] text-center text-[13.5px] text-muted">
+          <div className="mt-3 grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
+            <div className="rounded-lg border border-dashed border-line p-3 text-center text-[12.5px] text-muted">
               <b className="font-medium text-ink">Partner legal data</b> — case
               law, dockets, regulatory feeds
             </div>
-            <div className="rounded-[10px] border border-dashed border-line p-[15px_16px] text-center text-[13.5px] text-muted">
+            <div className="rounded-lg border border-dashed border-line p-3 text-center text-[12.5px] text-muted">
               <b className="font-medium text-ink">Client private VPC</b> — your
               network, your firewall rules
             </div>
