@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
+  <defs>
+    <filter id="blur-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+
+    <linearGradient id="emerald-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2EE6A6" />
+      <stop offset="100%" stop-color="#17B87F" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D4A843" />
+      <stop offset="100%" stop-color="#B8922E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Soft glow core -->
+  <circle cx="150" cy="150" r="60" fill="#2EE6A6" opacity="0.05" filter="url(#blur-soft)" />
+
+  <!-- Thin rings -->
+  <circle cx="150" cy="150" r="34" fill="none" stroke="#2EE6A6" stroke-width="1.5" opacity="0.20" />
+  <circle cx="150" cy="150" r="48" fill="none" stroke="#17B87F" stroke-width="1" opacity="0.14" />
+
+  <!-- Emerald dots -->
+  <circle cx="150" cy="150" r="6" fill="url(#emerald-grad)" opacity="0.28" />
+  <circle cx="120" cy="110" r="4" fill="#2EE6A6" opacity="0.24" />
+  <circle cx="190" cy="100" r="3" fill="#17B87F" opacity="0.22" />
+  <circle cx="210" cy="170" r="4.5" fill="#2EE6A6" opacity="0.20" />
+  <circle cx="95" cy="200" r="3.5" fill="#2EE6A6" opacity="0.22" />
+  <circle cx="180" cy="220" r="2.5" fill="#17B87F" opacity="0.18" />
+  <circle cx="70" cy="120" r="2.5" fill="#2EE6A6" opacity="0.18" />
+
+  <!-- Gold dots -->
+  <circle cx="100" cy="80" r="3" fill="#D4A843" opacity="0.24" />
+  <circle cx="230" cy="90" r="2.5" fill="#B8922E" opacity="0.20" />
+  <circle cx="240" cy="210" r="3.5" fill="#D4A843" opacity="0.20" />
+  <circle cx="110" cy="250" r="3" fill="#B8922E" opacity="0.18" />
+  <circle cx="80" cy="160" r="2" fill="#D4A843" opacity="0.20" />
+
+  <!-- Small triangles -->
+  <polygon points="200,60 208,72 194,74" fill="#2EE6A6" opacity="0.20" />
+  <polygon points="60,220 68,230 54,233" fill="#D4A843" opacity="0.18" />
+  <polygon points="220,240 228,250 214,252" fill="#2EE6A6" opacity="0.16" />
+
+  <!-- Tiny gold rings -->
+  <circle cx="220" cy="130" r="10" fill="none" stroke="#D4A843" stroke-width="1" opacity="0.16" />
+  <circle cx="85" cy="95" r="8" fill="none" stroke="#B8922E" stroke-width="1" opacity="0.14" />
+
+  <!-- Micro fragments -->
+  <rect x="195" y="150" width="6" height="6" rx="1.5" fill="#D4A843" opacity="0.18" transform="rotate(30 198 153)" />
+  <rect x="105" y="135" width="5" height="5" rx="1.5" fill="#2EE6A6" opacity="0.18" transform="rotate(-25 107 137)" />
+</svg>
