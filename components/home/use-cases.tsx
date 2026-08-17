@@ -89,7 +89,7 @@ export function UseCases() {
           ))}
         </div>
 
-        <div className="surface-card mt-6 grid gap-8 p-8 md:grid-cols-[1.1fr_0.9fr] md:p-12">
+        <div className="mt-10 grid gap-8 border-t border-line pt-10 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
           <h3 className="max-w-[20ch] text-[clamp(24px,3.4vw,40px)] leading-[1.06] font-semibold tracking-[-0.03em] text-ink">
             {g.title}
           </h3>

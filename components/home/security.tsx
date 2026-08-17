@@ -54,8 +54,8 @@ export function Security() {
             </p>
           </div>
 
-          <Reveal className="surface-card overflow-hidden">
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+          <Reveal className="border-t border-line">
+            <div className="flex items-center justify-between border-b border-line py-3">
               <MonoLabel>Control</MonoLabel>
               <MonoLabel>Status</MonoLabel>
             </div>
@@ -63,9 +63,9 @@ export function Security() {
               {ROWS.map((r) => (
                 <div
                   key={r.control}
-                  className="flex items-center justify-between px-5 py-3.5"
+                  className="flex items-center justify-between py-4"
                 >
-                  <span className="text-[14px] text-ink">{r.control}</span>
+                  <span className="text-[15px] text-ink">{r.control}</span>
                   <span className={`inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.1em] ${text(r.tone)}`}>
                     <span className={`h-1.5 w-1.5 rounded-full ${dot(r.tone)}`} />
                     {r.state}
