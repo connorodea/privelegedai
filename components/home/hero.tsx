@@ -16,7 +16,7 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+              "linear-gradient(rgba(1,1,30,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(1,1,30,0.035) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
             maskImage:
               "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
@@ -24,15 +24,15 @@ export function Hero() {
               "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
           }}
         />
-        <div className="absolute top-[-20%] right-[-10%] h-[500px] w-[900px] bg-[radial-gradient(ellipse,rgba(92,230,143,0.10)_0%,transparent_65%)]" />
-        <div className="absolute bottom-[-30%] left-[-15%] h-[600px] w-[800px] bg-[radial-gradient(ellipse,rgba(139,124,255,0.08)_0%,transparent_60%)]" />
+        <div className="absolute top-[-20%] right-[-10%] h-[500px] w-[900px] bg-[radial-gradient(ellipse,rgba(11,143,94,0.12)_0%,transparent_65%)]" />
+        <div className="absolute bottom-[-30%] left-[-15%] h-[600px] w-[800px] bg-[radial-gradient(ellipse,rgba(47,111,228,0.10)_0%,transparent_60%)]" />
       </div>
       <Container className="relative">
         <Eyebrow>Ephemeral inference for law</Eyebrow>
-        <h1 className="max-w-[22ch] font-sans text-[clamp(40px,6vw,64px)] leading-[1.05] font-semibold tracking-[-0.035em]">
+        <h1 className="max-w-[22ch] font-sans text-[clamp(40px,6vw,64px)] leading-[1.05] font-semibold tracking-[-0.035em] text-ink">
           Ephemeral by default.
           <br />
-          <span className="bg-gradient-to-r from-accent to-violet bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-accent to-blue bg-clip-text text-transparent">
             Privileged by design.
           </span>
         </h1>

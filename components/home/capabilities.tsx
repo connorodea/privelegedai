@@ -88,10 +88,7 @@ export function Capabilities() {
         />
         <div className="mt-12 grid grid-cols-1 gap-3 min-[900px]:grid-cols-3">
           {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
-            >
+            <div key={f.title} className="card p-5">
               <div className="mb-4 h-5 w-5 text-accent">{f.icon}</div>
               <h3 className="text-[14.5px] font-medium text-ink">{f.title}</h3>
               <p className="mt-2 text-[13px] leading-[1.6] text-muted">

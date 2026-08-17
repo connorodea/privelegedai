@@ -232,7 +232,7 @@ export default function Pricing() {
       <main id="main">
         <section className="wrap pb-16 pt-[110px]">
           <Kicker>Pricing</Kicker>
-          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em]">
+          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink">
             Simple by design.
           </h1>
           <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
@@ -246,10 +246,10 @@ export default function Pricing() {
             {TIERS.map((t) => (
               <div
                 key={t.name}
-                className={`flex flex-col rounded-lg border bg-surface p-6 transition-colors duration-150 hover:bg-surface2 ${
+                className={`flex flex-col rounded-lg border p-6 shadow-[0_1px_2px_rgba(1,1,30,0.04)] transition-colors duration-150 hover:bg-surface2 ${
                   t.name === "Firm"
-                    ? "border-accent/40 hover:border-accent/60"
-                    : "border-line hover:border-line2"
+                    ? "border-accent/50 bg-accent/[0.03] ring-1 ring-accent/20"
+                    : "border-line bg-white hover:border-line2"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -312,7 +312,7 @@ export default function Pricing() {
               {INCLUDED.map((c) => (
                 <div
                   key={c.title}
-                  className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
+                  className="rounded-lg border border-line bg-white p-5 shadow-[0_1px_2px_rgba(1,1,30,0.04)] transition-colors duration-150 hover:border-line2 hover:bg-surface2"
                 >
                   <div className="mb-3 text-accent">{c.icon}</div>
                   <h3 className="text-[14.5px] font-medium text-ink">

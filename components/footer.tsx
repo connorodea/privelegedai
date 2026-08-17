@@ -40,21 +40,21 @@ const COLS = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line py-16">
+    <footer className="bg-ink py-16 text-white">
       <div className="wrap">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
-            <Logo className="text-[17px]" />
-            <p className="mt-4 max-w-[30ch] text-[13px] leading-relaxed text-faint">
+            <Logo className="text-[17px] text-white" />
+            <p className="mt-4 max-w-[30ch] text-[13px] leading-relaxed text-white/60">
               The ephemeral inference layer for legal AI. Nothing persists.
             </p>
-            <p className="mt-6 font-mono text-[11px] tracking-[0.08em] text-faint">
+            <p className="mt-6 font-mono text-[11px] tracking-[0.08em] text-white/40">
               privilegedinfra.com
             </p>
           </div>
           {COLS.map((col) => (
             <div key={col.title}>
-              <div className="mb-4 font-mono text-[11px] tracking-[0.14em] uppercase text-faint">
+              <div className="mb-4 font-mono text-[11px] tracking-[0.14em] uppercase text-white/40">
                 {col.title}
               </div>
               <ul className="space-y-2.5">
@@ -62,7 +62,7 @@ export function Footer() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-[13px] text-muted transition-colors hover:text-ink"
+                      className="text-[13px] text-white/70 transition-colors hover:text-white"
                     >
                       {l.label}
                     </Link>
@@ -72,7 +72,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6 text-[12px] text-faint">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-[12px] text-white/50">
           <span>© 2026 Privileged Infra. All rights reserved.</span>
           <span>
             Ephemeral inference · Static-IP egress · Zero-data retention

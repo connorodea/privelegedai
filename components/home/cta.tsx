@@ -4,11 +4,11 @@ export function Cta() {
   return (
     <section id="access" className="section relative overflow-hidden text-center">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(92,230,143,0.08)_0%,transparent_60%)]" />
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(11,143,94,0.08)_0%,transparent_60%)]" />
       </div>
       <Container className="relative">
         <Kicker>Early access</Kicker>
-        <h2 className="mx-auto max-w-[24ch] text-[clamp(28px,4vw,40px)] leading-[1.1] font-semibold tracking-[-0.03em]">
+        <h2 className="mx-auto max-w-[24ch] text-[clamp(28px,4vw,40px)] leading-[1.1] font-semibold tracking-[-0.03em] text-ink">
           Run privileged inference.
         </h2>
         <p className="mx-auto mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-muted">
