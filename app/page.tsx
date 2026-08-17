@@ -8,6 +8,7 @@ import { CrystalSection } from "@/components/home/crystal-section";
 import { Primitives } from "@/components/home/primitives";
 import { Architecture } from "@/components/home/architecture";
 import { Security } from "@/components/home/security";
+import { BigNumbers } from "@/components/home/big-numbers";
 import { Infrastructure } from "@/components/home/infrastructure";
 import { UseCases } from "@/components/home/use-cases";
 import { Convergence } from "@/components/home/convergence";
@@ -39,6 +40,7 @@ export default function Home() {
         <Primitives />
         <Architecture />
         <Security />
+        <BigNumbers />
         <Infrastructure />
         <UseCases />
         <Convergence />

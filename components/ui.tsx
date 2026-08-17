@@ -1,5 +1,44 @@
 import type { ReactNode } from "react";
 
+/** Lightweight glossy orb motif (pure CSS — no WebGL). Decorative. */
+export function CssOrb({
+  size = 44,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`relative inline-block shrink-0 rounded-full ${className}`}
+      style={{ width: size, height: size }}
+    >
+      <span
+        className="absolute inset-0 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at 34% 30%, #cdefff 0%, #4fc3ff 30%, #123a54 68%, #0a1622 100%)",
+          boxShadow:
+            "inset 0 -2px 6px rgba(0,0,0,0.5), 0 0 18px rgba(79,195,255,0.35)",
+        }}
+      />
+      <span
+        className="absolute rounded-full"
+        style={{
+          top: "16%",
+          left: "22%",
+          width: "34%",
+          height: "26%",
+          background:
+            "radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%)",
+          filter: "blur(1px)",
+        }}
+      />
+    </span>
+  );
+}
+
 /** Serif-italic display accent (Instrument Serif) for emphasis within titles. */
 export function Serif({
   children,

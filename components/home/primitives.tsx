@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Container, SectionHeading, MonoLabel, StatusDot } from "@/components/ui";
+import { Container, SectionHeading, MonoLabel, StatusDot, CssOrb } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
 function StateTag({ children }: { children: ReactNode }) {
@@ -30,7 +30,8 @@ function Row({
   return (
     <Reveal className="grid items-center gap-8 border-t border-line py-14 first:border-t-0 lg:grid-cols-2 lg:gap-16 lg:py-20">
       <div className={flip ? "lg:order-2" : ""}>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3.5">
+          <CssOrb size={34} />
           <span className="font-mono text-[12px] text-accent">{index}</span>
           <MonoLabel>{eyebrow}</MonoLabel>
         </div>

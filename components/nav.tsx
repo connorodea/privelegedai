@@ -44,15 +44,18 @@ export function Nav() {
 
       <nav
         aria-label="Main"
-        className={`sticky top-0 z-50 border-b transition-transform duration-300 ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        } ${
-          scrolled
-            ? "border-line bg-bg/80 backdrop-blur-xl"
-            : "border-transparent bg-bg/40 backdrop-blur-md"
+        className={`sticky top-3 z-50 transition-transform duration-300 ${
+          hidden ? "-translate-y-[140%]" : "translate-y-0"
         }`}
       >
-        <div className="wrap flex h-16 items-center justify-between">
+        <div className="wrap">
+          <div
+            className={`flex h-14 items-center justify-between rounded-full border px-3 pl-5 transition-colors duration-300 ${
+              scrolled
+                ? "border-line2 bg-bg/70 backdrop-blur-xl shadow-[0_8px_40px_-12px_rgba(0,0,0,0.7)]"
+                : "border-line bg-bg/40 backdrop-blur-md"
+            }`}
+          >
           <Link href="/" aria-label="Privileged home" className="flex items-center">
             <Logo className="text-[18px] tracking-[-0.01em] text-ink" />
           </Link>
@@ -88,32 +91,33 @@ export function Nav() {
                 {open ? <path d="M3 3l10 10M13 3L3 13" /> : <path d="M2 4h12M2 8h12M2 12h12" />}
               </svg>
             </button>
-          </div>
-        </div>
-
-        {open ? (
-          <div className="border-t border-line bg-bg px-5 py-4 md:hidden">
-            <div className="grid gap-1">
-              {LINKS.map((l) => (
-                <Link
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-md px-2 py-2.5 text-[15px] text-muted hover:bg-white/[0.03] hover:text-ink"
-                >
-                  {l.label}
-                </Link>
-              ))}
-              <Button
-                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
-                className="mt-2 w-full"
-                arrow
-              >
-                Request access
-              </Button>
             </div>
           </div>
-        ) : null}
+
+          {open ? (
+            <div className="mt-2 rounded-[18px] border border-line2 bg-bg/90 px-4 py-4 backdrop-blur-xl md:hidden">
+              <div className="grid gap-1">
+                {LINKS.map((l) => (
+                  <Link
+                    key={l.label}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-2 py-2.5 text-[15px] text-muted hover:bg-white/[0.03] hover:text-ink"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+                <Button
+                  href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+                  className="mt-2 w-full"
+                  arrow
+                >
+                  Request access
+                </Button>
+              </div>
+            </div>
+          ) : null}
+        </div>
       </nav>
     </>
   );
