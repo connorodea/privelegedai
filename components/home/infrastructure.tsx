@@ -1,4 +1,4 @@
-import { Container, SectionHeading, MonoLabel, StatusDot } from "@/components/ui";
+import { Container, SectionHeading, MonoLabel } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
 const CELLS = [
@@ -14,9 +14,6 @@ const CELLS = [
 
 function toneText(t: "signal" | "accent") {
   return t === "signal" ? "text-signal" : "text-accent";
-}
-function toneDot(t: "signal" | "accent") {
-  return t === "signal" ? "signal" : "accent";
 }
 
 export function Infrastructure() {
@@ -36,15 +33,15 @@ export function Infrastructure() {
           </span>
         </div>
 
-        <Reveal className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line md:grid-cols-4">
+        <Reveal className="mt-12 grid grid-cols-2 divide-x divide-y divide-line border-y border-line md:grid-cols-4">
           {CELLS.map((c) => (
-            <div key={c.label} className="bg-surface p-5">
+            <div key={c.label} className="p-6">
               <MonoLabel>{c.label}</MonoLabel>
-              <div className="mt-3 text-[18px] font-medium tracking-[-0.01em] text-ink">
+              <div className="mt-4 text-[21px] font-medium tracking-[-0.015em] text-ink">
                 {c.value}
               </div>
-              <div className={`mt-2 inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.1em] ${toneText(c.tone)}`}>
-                <StatusDot tone={toneDot(c.tone)} />
+              <div className={`mt-2.5 inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.1em] ${toneText(c.tone)}`}>
+                <span className={`h-1.5 w-1.5 rounded-full ${c.tone === "signal" ? "bg-signal" : "bg-accent"}`} />
                 {c.state}
               </div>
             </div>
