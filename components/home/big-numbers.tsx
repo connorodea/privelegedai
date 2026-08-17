@@ -1,4 +1,4 @@
-import { Container, SectionHeading, MonoLabel, Serif } from "@/components/ui";
+import { Container, SectionHeading, MonoLabel } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
 const STATS = [
@@ -19,7 +19,7 @@ export function BigNumbers() {
       <Container className="relative">
         <SectionHeading
           kicker="By design"
-          title={<>The numbers that <Serif>actually</Serif> matter.</>}
+          title={<>The numbers that <span className="text-accent">actually</span> matter.</>}
           lede="Not throughput benchmarks — the architectural facts a security team verifies."
         />
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Container, MonoLabel, Serif } from "@/components/ui";
+import { Container, MonoLabel } from "@/components/ui";
 
 const Crystal = dynamic(() => import("@/components/three/crystal"), {
   ssr: false,
@@ -48,8 +48,8 @@ export function CrystalSection() {
         <div className="mx-auto max-w-[46ch] text-center">
           <MonoLabel>The execution boundary</MonoLabel>
           <h2 className="mt-6 text-[clamp(32px,5vw,64px)] leading-[1.02] font-semibold tracking-[-0.035em] text-ink">
-            A protected space that <Serif>appears</Serif>, does the work, and{" "}
-            <Serif>disappears.</Serif>
+            A protected space that <span className="text-accent">appears</span>, does the work, and{" "}
+            <span className="text-accent">disappears.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-[52ch] text-[16px] leading-[1.6] text-muted">
             Every privileged request runs inside a boundary that exists only for

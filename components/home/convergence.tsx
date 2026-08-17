@@ -26,14 +26,18 @@ export function Convergence() {
           lede="Privileged sits between technical and legal requirements — so neither team has to compromise to trust the other."
         />
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-3 lg:gap-5">
+        <div className="mt-16 grid gap-x-12 gap-y-10 border-t border-line pt-10 md:grid-cols-3 md:divide-x md:divide-line">
           {COLUMNS.map((col, i) => (
-            <Reveal key={col.role} delay={i * 80} className="surface-card p-6">
-              <MonoLabel>{col.role}</MonoLabel>
-              <ul className="mt-5 space-y-2.5">
+            <Reveal key={col.role} delay={i * 80} className="md:px-8 md:first:pl-0">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-[12px] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <MonoLabel>{col.role}</MonoLabel>
+              </div>
+              <ul className="mt-6 space-y-3">
                 {col.items.map((it) => (
-                  <li key={it} className="flex items-center gap-3 text-[14px] text-muted">
-                    <span className="h-1 w-1 flex-none rounded-full bg-faint" />
+                  <li key={it} className="text-[15px] leading-snug text-muted">
                     {it}
                   </li>
                 ))}
