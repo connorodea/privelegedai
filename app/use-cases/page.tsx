@@ -64,7 +64,7 @@ export default function UseCases() {
       <main id="main">
         <Container className="pt-24 pb-16">
           <Kicker>Use cases</Kicker>
-          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em]">
+          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em] text-ink">
             Built for the legal stack.
           </h1>
           <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-muted">
@@ -87,7 +87,7 @@ export default function UseCases() {
                   <div className="font-mono text-[11px] tracking-[0.14em] text-faint">
                     {p.kicker.split(" — ")[1]}
                   </div>
-                  <h2 className="mt-2 text-[clamp(20px,2.6vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em]">
+                  <h2 className="mt-2 font-sans text-[clamp(20px,2.6vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em] text-ink">
                     {p.title}
                   </h2>
                   <p className="mt-4 text-[14px] leading-[1.7] text-muted">
@@ -122,7 +122,7 @@ export default function UseCases() {
                     {p.chips.map((c) => (
                       <span
                         key={c}
-                        className="inline-flex rounded-full border border-line2 px-3 py-1 font-mono text-[11px] text-muted"
+                        className="inline-flex rounded-full border border-line2 bg-white px-3 py-1 font-mono text-[11px] text-muted"
                       >
                         {c}
                       </span>

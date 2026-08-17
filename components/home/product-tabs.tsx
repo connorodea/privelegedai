@@ -177,7 +177,7 @@ export function ProductTabs() {
           lede="Run custom legal models, bundle premium data feeds, and white-label partner compute — all through a single DPA, signed in days."
         />
         <div
-          className="mt-12 inline-flex gap-0.5 rounded-full border border-line bg-bg3 p-1"
+          className="mt-12 inline-flex rounded-full border border-line bg-white p-1 shadow-[0_1px_2px_rgba(1,1,30,0.04)]"
           role="tablist"
           aria-label="Product capabilities"
         >
@@ -197,8 +197,8 @@ export function ProductTabs() {
               onKeyDown={(e) => handleKeyDown(e, i)}
               className={`cursor-pointer rounded-full px-4 py-1.5 font-mono text-[12px] transition-colors duration-150 ${
                 active === i
-                  ? "border border-line2 bg-surface2 text-ink"
-                  : "border border-transparent text-muted hover:text-ink"
+                  ? "bg-ink text-white"
+                  : "text-muted hover:text-ink"
               }`}
             >
               {tab.label}
@@ -217,10 +217,7 @@ export function ProductTabs() {
             }`}
           >
             {tab.cards.map((c) => (
-              <div
-                key={c.title}
-                className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
-              >
+              <div key={c.title} className="card p-5">
                 <div className="mb-4 h-5 w-5 text-accent">{c.icon}</div>
                 <h3 className="text-[14.5px] font-medium text-ink">{c.title}</h3>
                 <p className="mt-2 text-[13px] leading-[1.6] text-muted">

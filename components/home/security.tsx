@@ -32,7 +32,7 @@ export function Security() {
           title="The checklist your IT auditor will run."
           lede="Every domain is engineered in from the infrastructure layer — not retrofitted via policy."
         />
-        <div className="mt-10 overflow-hidden rounded-lg border border-line">
+        <div className="mt-10 overflow-hidden rounded-lg border border-line bg-white">
           <div className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line bg-bg3 max-[750px]:hidden">
             <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
               Domain

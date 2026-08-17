@@ -80,7 +80,7 @@ export default function Faq() {
       <main id="main">
         <section className="wrap pt-[110px] pb-[100px]">
           <Kicker>FAQ</Kicker>
-          <h1 className="max-w-[20ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em]">
+          <h1 className="max-w-[20ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink">
             Answers for your IT auditor.
           </h1>
           <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
@@ -92,7 +92,7 @@ export default function Faq() {
             {FAQS.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-lg border border-line bg-surface"
+                className="group rounded-lg border border-line bg-white shadow-[0_1px_2px_rgba(1,1,30,0.03)] open:border-accent/30"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[14px] font-medium text-ink [&::-webkit-details-marker]:hidden">
                   <span className="flex-1">{item.q}</span>

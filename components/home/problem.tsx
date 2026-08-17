@@ -53,7 +53,7 @@ export function Problem() {
                   key={check}
                   className="flex items-start gap-2.5 text-[13.5px] text-ink"
                 >
-                  <span className="mt-px flex h-5 w-5 flex-none items-center justify-center rounded-full border border-accent/40 bg-accent/15">
+                  <span className="mt-px flex h-5 w-5 flex-none items-center justify-center rounded-full border border-accent/40 bg-accent/10">
                     <svg
                       className="h-3 w-3 text-accent"
                       viewBox="0 0 16 16"

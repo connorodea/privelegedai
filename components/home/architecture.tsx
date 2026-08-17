@@ -84,10 +84,10 @@ export function Architecture() {
                   </div>
                 ) : null}
                 <div
-                  className={`rounded-lg border p-4 ${
+                  className={`rounded-lg border p-4 shadow-[0_1px_2px_rgba(1,1,30,0.03)] ${
                     node.highlight
                       ? "border-accent/40 bg-accent/5"
-                      : "border-line bg-bg2"
+                      : "border-line bg-white"
                   }`}
                 >
                   <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-faint">
@@ -105,11 +105,11 @@ export function Architecture() {
             ))}
           </div>
           <div className="mt-3 grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
-            <div className="rounded-lg border border-dashed border-line p-3 text-center text-[12.5px] text-muted">
+            <div className="rounded-lg border border-dashed border-line2 p-3 text-center text-[12.5px] text-muted">
               <b className="font-medium text-ink">Partner legal data</b> — case
               law, dockets, regulatory feeds
             </div>
-            <div className="rounded-lg border border-dashed border-line p-3 text-center text-[12.5px] text-muted">
+            <div className="rounded-lg border border-dashed border-line2 p-3 text-center text-[12.5px] text-muted">
               <b className="font-medium text-ink">Client private VPC</b> — your
               network, your firewall rules
             </div>

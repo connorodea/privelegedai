@@ -106,7 +106,7 @@ export default function Docs() {
       <main id="main">
         <Container className="pt-24 pb-16">
           <Kicker>Docs</Kicker>
-          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em]">
+          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em] text-ink">
             Privileged in five minutes.
           </h1>
           <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-muted">
@@ -122,7 +122,7 @@ export default function Docs() {
               Run privileged inference in three steps.
             </h2>
             <div className="mt-12 grid items-start gap-12 min-[900px]:grid-cols-[1.2fr_1fr]">
-              <div className="term-window max-w-[620px]">
+              <div className="term-window max-w-[620px] border-navy2">
                 <div
                   aria-hidden
                   className="flex items-center gap-[7px] border-b border-line bg-white/[0.02] px-4 py-3"
@@ -130,32 +130,32 @@ export default function Docs() {
                   <span className="h-[9px] w-[9px] rounded-full bg-[#FF5F57]" />
                   <span className="h-[9px] w-[9px] rounded-full bg-[#FFBD2E]" />
                   <span className="h-[9px] w-[9px] rounded-full bg-[#27CA40]" />
-                  <span className="ml-2 font-mono text-[11px] text-faint">
+                  <span className="ml-2 font-mono text-[11px] text-[#5C6378]">
                     privileged run — ephemeral container lifecycle
                   </span>
                 </div>
                 <div className="term-body">
-                  <span className="text-faint">$</span>{" "}
-                  <span className="text-accent">
+                  <span className="text-[#5C6378]">$</span>{" "}
+                  <span className="text-green-bright">
                     privileged run --model client-vault:latest
                   </span>
                   <br />
-                  <span className="text-faint">container:</span>{" "}
-                  <span className="text-blue">eph-a3f2b1c</span>{"  "}
-                  <span className="text-faint">ip:</span>{" "}
-                  <span className="text-amber">5.161.239.237</span>{"  "}
-                  <span className="text-faint">status:</span>{" "}
-                  <span className="text-blue">ready</span>
+                  <span className="text-[#5C6378]">container:</span>{" "}
+                  <span className="text-blue-bright">eph-a3f2b1c</span>{"  "}
+                  <span className="text-[#5C6378]">ip:</span>{" "}
+                  <span className="text-amber-bright">5.161.239.237</span>{"  "}
+                  <span className="text-[#5C6378]">status:</span>{" "}
+                  <span className="text-blue-bright">ready</span>
                   <br />
-                  <span className="text-faint">stream:</span>{" "}
+                  <span className="text-[#5C6378]">stream:</span>{" "}
                   token-0 → token-1 → ... → token-n
                   <br />
-                  <span className="text-faint">stream closed</span> —{" "}
-                  <span className="text-blue">container decommissioned</span>
+                  <span className="text-[#5C6378]">stream closed</span> —{" "}
+                  <span className="text-blue-bright">container decommissioned</span>
                   <br />
-                  <span className="text-faint">persistence:</span> none
+                  <span className="text-[#5C6378]">persistence:</span> none
                   &nbsp;|&nbsp;{" "}
-                  <span className="text-faint">data written to disk:</span> 0
+                  <span className="text-[#5C6378]">data written to disk:</span> 0
                   bytes
                   <br />
                 </div>
@@ -163,7 +163,7 @@ export default function Docs() {
               <ol className="grid gap-7">
                 {STEPS.map((s, i) => (
                   <li key={s.title} className="flex gap-4">
-                    <span className="grid h-7 w-7 flex-none place-items-center rounded-md border border-line bg-bg2 font-mono text-[12px] text-faint">
+                    <span className="grid h-7 w-7 flex-none place-items-center rounded-md border border-line bg-bg3 font-mono text-[12px] text-faint">
                       0{i + 1}
                     </span>
                     <div>
@@ -200,7 +200,7 @@ export default function Docs() {
               {CONCEPTS.map((c) => (
                 <div
                   key={c.title}
-                  className="rounded-lg border border-line bg-surface p-5 transition-colors duration-150 hover:border-line2 hover:bg-surface2"
+                  className="card p-5"
                 >
                   <div className="mb-4 h-5 w-5 text-accent">{c.icon}</div>
                   <h3 className="text-[14.5px] font-medium text-ink">
@@ -225,7 +225,7 @@ export default function Docs() {
               Highlights from the Privileged Data Processing Agreement, with
               the section references your outside counsel can cite.
             </p>
-            <div className="mt-10 overflow-hidden rounded-lg border border-line">
+            <div className="mt-10 overflow-hidden rounded-lg border border-line bg-white">
               <div className="grid max-[750px]:hidden grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line bg-bg3">
                 <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.12em] uppercase text-faint">
                   Control
