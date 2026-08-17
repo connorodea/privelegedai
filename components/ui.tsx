@@ -148,9 +148,11 @@ export function Kicker({
   children: ReactNode;
   tone?: "muted" | "accent";
 }) {
+  void tone;
+  // Quiet static label (Together/Baseten register) — no pulsing dot.
   return (
-    <div className="kicker">
-      <StatusDot tone={tone === "accent" ? "accent" : "muted"} />
+    <div className="mb-6 flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] uppercase text-faint">
+      <span aria-hidden="true" className="h-[2px] w-4 bg-accent" />
       {children}
     </div>
   );
@@ -158,8 +160,8 @@ export function Kicker({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-line2 bg-white/[0.03] px-3.5 py-1.5 font-mono text-[11px] tracking-[0.16em] uppercase text-muted">
-      <StatusDot tone="accent" />
+    <span className="mb-7 flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] uppercase text-muted">
+      <span aria-hidden="true" className="h-[2px] w-5 bg-accent" />
       {children}
     </span>
   );
@@ -180,19 +182,20 @@ export function SectionHeading({
   align?: "left" | "center";
   kickerTone?: "muted" | "accent";
 }) {
+  void kickerTone;
   return (
-    <div className={align === "center" ? "mx-auto max-w-[52ch] text-center" : ""}>
-      <Kicker tone={kickerTone}>{kicker}</Kicker>
+    <div className={align === "center" ? "mx-auto max-w-[54ch] text-center" : ""}>
+      <Kicker>{kicker}</Kicker>
       <h2
         id={id}
-        className="max-w-[24ch] text-[clamp(30px,4.6vw,54px)] leading-[1.04] font-semibold tracking-[-0.03em] text-ink"
+        className="max-w-[20ch] text-[clamp(32px,5vw,60px)] leading-[0.98] font-semibold tracking-[-0.04em] text-ink"
         style={align === "center" ? { marginInline: "auto" } : undefined}
       >
         {title}
       </h2>
       {lede ? (
         <p
-          className="mt-5 max-w-[62ch] text-[16px] leading-[1.6] text-muted"
+          className="mt-6 max-w-[58ch] text-[17px] leading-[1.6] text-muted"
           style={align === "center" ? { marginInline: "auto" } : undefined}
         >
           {lede}

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Button, Container, Eyebrow, StatusDot, Serif } from "@/components/ui";
+import { Button, Container, Eyebrow, StatusDot } from "@/components/ui";
 import { useLifecycle } from "@/lib/lifecycle";
 
 const RuntimeOrb = dynamic(() => import("@/components/three/runtime-orb"), {
@@ -66,10 +66,10 @@ export function Hero() {
           {/* left: copy */}
           <div>
             <Eyebrow>Private AI infrastructure for legal</Eyebrow>
-            <h1 className="max-w-[16ch] text-[clamp(42px,6.4vw,82px)] leading-[0.98] font-semibold tracking-[-0.04em] text-ink">
+            <h1 className="max-w-[14ch] text-[clamp(46px,7vw,92px)] leading-[0.93] font-semibold tracking-[-0.045em] text-ink">
               Ephemeral by default.
               <br />
-              <Serif className="text-muted">Privileged by design.</Serif>
+              <span className="text-accent">Privileged by design.</span>
             </h1>
             <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.6] text-muted">
               Run AI over privileged data in isolated, ephemeral compute.
@@ -88,13 +88,10 @@ export function Hero() {
                 Explore architecture
               </Button>
             </div>
-            <div className="mt-10 flex flex-wrap gap-x-5 gap-y-2">
-              {CHIPS.map((c) => (
-                <span
-                  key={c}
-                  className="inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.14em] text-faint"
-                >
-                  <StatusDot tone="accent" />
+            <div className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-5 font-mono text-[10.5px] tracking-[0.14em] text-faint">
+              {CHIPS.map((c, i) => (
+                <span key={c} className="inline-flex items-center gap-4">
+                  {i > 0 ? <span className="text-line3">/</span> : null}
                   {c}
                 </span>
               ))}
