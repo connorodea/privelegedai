@@ -1,4 +1,4 @@
-import { Container, SectionHeading, MonoLabel } from "@/components/ui";
+import { Container, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
 const STATS = [
@@ -22,15 +22,19 @@ export function BigNumbers() {
           title={<>The numbers that <span className="text-accent">actually</span> matter.</>}
           lede="Not throughput benchmarks — the architectural facts a security team verifies."
         />
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 border-t border-line lg:grid-cols-4 lg:divide-x lg:divide-line">
           {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 80} className="bg-surface p-8">
-              <div className={`text-[clamp(40px,5vw,64px)] leading-none font-semibold tracking-[-0.04em] ${tone(s.tone)}`}>
+            <Reveal
+              key={s.label}
+              delay={i * 80}
+              className="py-9 pr-6 lg:px-9 lg:first:pl-0"
+            >
+              <div className={`text-[clamp(48px,6vw,80px)] leading-[0.9] font-semibold tracking-[-0.045em] ${tone(s.tone)}`}>
                 {s.value}
               </div>
-              <MonoLabel className="mt-5 block max-w-[22ch] leading-[1.5] normal-case tracking-[0.04em] text-muted">
+              <div className="mt-5 max-w-[22ch] text-[13.5px] leading-[1.5] text-muted">
                 {s.label}
-              </MonoLabel>
+              </div>
             </Reveal>
           ))}
         </div>
