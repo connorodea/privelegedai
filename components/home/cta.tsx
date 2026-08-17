@@ -1,4 +1,4 @@
-import { Button, Container, Kicker } from "@/components/ui";
+import { Button, Container, Kicker, Serif } from "@/components/ui";
 
 export function Cta() {
   return (
@@ -15,7 +15,7 @@ export function Cta() {
           <Kicker tone="accent">Request access</Kicker>
         </div>
         <h2 className="mx-auto max-w-[18ch] text-[clamp(34px,5.4vw,68px)] leading-[0.98] font-semibold tracking-[-0.035em] text-ink">
-          Private AI shouldn&apos;t require a private cloud.
+          Private AI shouldn&apos;t require a <Serif>private cloud.</Serif>
         </h2>
         <p className="mx-auto mt-6 max-w-[52ch] text-[16px] leading-[1.6] text-muted">
           Run privileged inference without carrying the operational burden of

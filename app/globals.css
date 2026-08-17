@@ -33,6 +33,7 @@
 
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
   --font-brand: var(--font-brand-mont), var(--font-inter), sans-serif;
 
   --radius-sm: 6px;

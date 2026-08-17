@@ -1,5 +1,23 @@
 import type { ReactNode } from "react";
 
+/** Serif-italic display accent (Instrument Serif) for emphasis within titles. */
+export function Serif({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <em
+      className={`italic tracking-[-0.005em] ${className}`}
+      style={{ fontFamily: "var(--font-serif)", fontWeight: 400 }}
+    >
+      {children}
+    </em>
+  );
+}
+
 export function Container({
   children,
   className = "",

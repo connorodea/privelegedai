@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Container, SectionHeading, MonoLabel, StatusDot } from "@/components/ui";
+import { Container, SectionHeading, MonoLabel, StatusDot, Serif } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 
 function FlowConnector({ label }: { label?: string }) {
@@ -78,7 +78,7 @@ export function Architecture() {
         <SectionHeading
           kicker="Architecture"
           kickerTone="accent"
-          title="Simple API outside. Sophisticated infrastructure underneath."
+          title={<>Simple API outside. <Serif>Sophisticated</Serif> infrastructure underneath.</>}
           lede="One OpenAI-compatible endpoint fronts a control plane, an ephemeral runtime, and controlled egress — each separated by an explicit security boundary."
         />
 

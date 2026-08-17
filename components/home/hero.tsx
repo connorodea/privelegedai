@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { Button, Container, Eyebrow, StatusDot } from "@/components/ui";
+import { Button, Container, Eyebrow, StatusDot, Serif } from "@/components/ui";
 import { useLifecycle } from "@/lib/lifecycle";
 
 const RuntimeOrb = dynamic(() => import("@/components/three/runtime-orb"), {
@@ -69,7 +69,7 @@ export function Hero() {
             <h1 className="max-w-[16ch] text-[clamp(42px,6.4vw,82px)] leading-[0.98] font-semibold tracking-[-0.04em] text-ink">
               Ephemeral by default.
               <br />
-              <span className="text-muted">Privileged by design.</span>
+              <Serif className="text-muted">Privileged by design.</Serif>
             </h1>
             <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.6] text-muted">
               Run AI over privileged data in isolated, ephemeral compute.

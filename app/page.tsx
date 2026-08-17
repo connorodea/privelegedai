@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { Hero } from "@/components/home/hero";
 import { Procurement } from "@/components/home/procurement";
 import { ExecutionLifecycle } from "@/components/home/execution-lifecycle";
+import { CrystalSection } from "@/components/home/crystal-section";
 import { Primitives } from "@/components/home/primitives";
 import { Architecture } from "@/components/home/architecture";
 import { Security } from "@/components/home/security";
@@ -34,6 +35,7 @@ export default function Home() {
         <Hero />
         <Procurement />
         <ExecutionLifecycle />
+        <CrystalSection />
         <Primitives />
         <Architecture />
         <Security />

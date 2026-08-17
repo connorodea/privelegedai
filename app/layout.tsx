@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +14,14 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-jetbrains",
+});
+
+// Serif-italic display accent for key section titles.
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
 });
 
 // Wordmark only — preserves brand continuity with the existing mark.
@@ -55,12 +64,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrains.variable} ${brandMont.variable}`}
+      className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable} ${brandMont.variable}`}
     >
       <body className="bg-bg font-sans text-[16px] leading-relaxed text-ink antialiased">
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <SmoothScroll />
         {children}
       </body>
     </html>
