@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Kicker } from "@/components/ui";
+import { Container, Kicker } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "FAQ — Privileged",
   description:
-    "Answers for IT and security teams on ephemeral inference, zero-data retention, static-IP egress, encryption, the DPA, and early access.",
+    "Answers for IT and security teams on ephemeral execution, zero-retention by default, static egress, tenant isolation, encryption, and the DPA.",
   alternates: { canonical: "/faq/" },
   openGraph: {
     title: "FAQ — Privileged",
     description:
-      "Answers for IT and security teams on ephemeral inference, zero-data retention, static-IP egress, encryption, the DPA, and early access.",
+      "Answers for IT and security teams on ephemeral execution, zero-retention by default, static egress, tenant isolation, and the DPA.",
     type: "website",
     url: "https://privilegedinfra.com/faq/",
   },
@@ -20,49 +20,49 @@ export const metadata: Metadata = {
 
 const FAQS: { q: string; a: ReactNode }[] = [
   {
-    q: "What is ephemeral inference?",
-    a: "Each session runs in its own short-lived container: the model loads, serves your request, and is destroyed the instant the token stream closes. Prompts, context, and generated tokens live only in volatile memory — nothing touches disk.",
+    q: "What is ephemeral execution?",
+    a: "Each request runs in its own short-lived environment: the model loads, serves the request, and the environment is destroyed when the session closes. Prompt, context, and generated tokens live in RAM-only scratch — no persistent disk is attached.",
   },
   {
-    q: "How is zero-data retention actually enforced?",
-    a: "It is built into the runtime, not negotiated. User Data never enters non-volatile storage, and session memory is discarded and rendered unrecoverable at termination — Privileged certifies the wipe in writing on request (DPA §§3–4).",
+    q: "How is zero retention enforced?",
+    a: "Execution paths are engineered so that prompts, responses, and uploaded document contents are not written to durable storage within the boundaries Privileged controls. Only payload-free metadata (request ID, token counts, latency, status) is retained. Persistent workflows are opt-in and customer-configured.",
   },
   {
     q: "Do you train on our data?",
-    a: "No — both contractually and technically. The DPA prohibits using User Data to train, fine-tune, or evaluate any model (DPA §5), and because nothing persists after a session, there is nothing to train on.",
+    a: "No — contractually and by construction. The DPA prohibits using customer data to train, fine-tune, or evaluate any model, and because execution data does not persist by default, there is nothing to train on.",
   },
   {
-    q: "Can we whitelist a static IP?",
-    a: "Yes. All outbound traffic egresses through a fixed, high-availability static-IP gateway. You receive the IP ranges up front, whitelist them once, and get advance notice of any change (DPA §8).",
+    q: "Can we whitelist a static egress IP?",
+    a: "Yes. Outbound traffic exits through controlled, static egress with a fixed infrastructure identity your firewall can whitelist. Default egress posture is deny unless a destination is explicitly allowed.",
+  },
+  {
+    q: "How is tenant isolation handled?",
+    a: "Isolation is enforced at multiple layers: org and project scoping on every record, database row-level security, and single-tenant runtime environments. Privileged offers graduated isolation classes; we describe the class actually provisioned rather than advertising a stronger level than is implemented.",
   },
   {
     q: "How long does the DPA take?",
-    a: "Days, not months. You sign one pre-audited DPA with Privileged instead of separate zero-data-retention agreements with every cloud and model vendor.",
+    a: "The goal is days, not months — one agreement with Privileged instead of separate zero-retention negotiations with every cloud and model vendor.",
   },
   {
-    q: "How are custom models isolated?",
-    a: "Your models and LoRA adapters — hot-swapped in milliseconds — are injected into temporary shared-memory volumes scoped to your session. No model, adapter, or weight from one firm is exposed to another firm's session, and isolation controls are tested and evidenced on request (DPA §7).",
+    q: "What about custom and private models?",
+    a: "Host private and fine-tuned models in isolated environments, or run open and Privileged-hosted models through one logical identifier. Weights stay yours and are never used for training. LoRA adapters are supported.",
   },
   {
     q: "What encryption do you support?",
-    a: "TLS 1.3 in transit and AES-256 at rest for any stored configuration, credentials, or model data. Stored data sits behind customer-managed keys: Privileged holds no keys and cannot decrypt without your key release (DPA §6).",
+    a: "TLS 1.3 in transit, and encryption at rest for stored configuration and model artifacts. Customer-managed keys are available for stored data.",
   },
   {
-    q: "Which data feeds can we bundle?",
-    a: "Premium case-law, docket, and regulatory feeds, delivered white-label under your brand. Bundle what your practice needs and present it as your own.",
+    q: "Are you SOC 2 or ISO 27001 certified?",
+    a: "Not at this time. The architecture is built to make those controls achievable, and we can walk security teams through the current posture — but Privileged does not claim certifications it has not completed.",
   },
   {
-    q: "Who is Privileged for?",
-    a: "BigLaw firms with privileged client matter, corporate legal and GC offices running sensitive internal and regulatory data, and legal-engineering teams integrating specialized models into products.",
-  },
-  {
-    q: "Is early access available?",
+    q: "Is access available now?",
     a: (
       <>
-        Yes — for a limited set of firms, with no minimum spend. Request
-        access at{" "}
+        Early access is open to a limited set of firms and legal-engineering
+        teams. Request access at{" "}
         <a
-          href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Early%20Access"
+          href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
           className="text-accent hover:underline"
         >
           hello@privilegedinfra.com
@@ -78,44 +78,38 @@ export default function Faq() {
     <>
       <Nav />
       <main id="main">
-        <section className="wrap pt-[110px] pb-[100px]">
+        <Container className="pt-24 pb-24">
           <Kicker>FAQ</Kicker>
-          <h1 className="max-w-[20ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink">
-            Answers for your IT auditor.
+          <h1 className="max-w-[20ch] text-[clamp(34px,5vw,58px)] leading-[1.04] font-semibold tracking-[-0.03em] text-ink">
+            Answers for your security reviewer.
           </h1>
-          <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
-            The questions your IT and security reviewers will raise — answered
-            from the DPA and the runtime, not from marketing.
+          <p className="mt-5 max-w-[54ch] text-[16px] leading-[1.6] text-muted">
+            The questions IT and security teams raise — answered from the
+            architecture and the DPA, not from marketing.
           </p>
 
-          <div className="mx-auto mt-14 max-w-[780px] space-y-3">
+          <div className="mt-14 max-w-[820px] space-y-3">
             {FAQS.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-lg border border-line bg-white shadow-[0_1px_2px_rgba(1,1,30,0.03)] open:border-accent/30"
+                className="surface-card group open:border-accent/30"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[14px] font-medium text-ink [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
                   <span className="flex-1">{item.q}</span>
                   <span
                     aria-hidden="true"
-                    className="shrink-0 font-mono text-[16px] leading-none text-accent group-open:hidden"
+                    className="shrink-0 font-mono text-[16px] leading-none text-accent transition-transform group-open:rotate-45"
                   >
                     +
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className="hidden shrink-0 font-mono text-[16px] leading-none text-accent group-open:inline"
-                  >
-                    −
-                  </span>
                 </summary>
-                <p className="px-5 pb-5 text-[13.5px] leading-[1.7] text-muted">
+                <p className="px-5 pb-5 text-[14px] leading-[1.7] text-muted">
                   {item.a}
                 </p>
               </details>
             ))}
           </div>
-        </section>
+        </Container>
       </main>
       <Footer />
     </>

@@ -2,10 +2,10 @@
 
 **Privileged inference. Nothing persists.**
 
-Privileged AI is the ephemeral inference layer for legal AI — a serverless platform that lets
-law firms run specialized models over sensitive matter data without the months-long
-zero-data-retention (ZDR) audit dance with the major clouds. We are the pre-audited intermediary:
-one DPA, signed in days, not months.
+Privileged AI is private AI infrastructure for legal and other highly sensitive workloads — a
+platform that lets law firms run specialized models over privileged matter data without the
+months-long zero-data-retention (ZDR) audit dance with the major clouds. We are the single
+intermediary: one DPA, signed in days, not months.
 
 ## What we do
 
@@ -22,8 +22,8 @@ one DPA, signed in days, not months.
 
 Law firms can't use AI on sensitive data because ZDR agreements with the big clouds take months of
 audits, minimum-spend commitments, and enterprise sales theater. Privileged removes that
-bottleneck entirely — a single pre-audited agreement that guarantees zero retention, no training,
-and hardware-level isolation on day one.
+bottleneck — a single agreement covering zero-retention execution by default, no training on your
+data, and tenant isolation, built at the infrastructure layer rather than promised in policy.
 
 ## Deployment
 

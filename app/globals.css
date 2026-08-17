@@ -1,37 +1,48 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #F7FAFD;
-  --color-bg2: #FFFFFF;
-  --color-bg3: #EEF5FD;
-  --color-surface: #FFFFFF;
-  --color-surface2: #EDF4FC;
-  --color-line: rgba(1, 1, 30, 0.08);
-  --color-line2: rgba(1, 1, 30, 0.14);
-  --color-ink: #01011E;
-  --color-muted: #46506B;
-  --color-faint: #8A90A6;
-  --color-accent: #0B8F5E;
-  --color-accent-dim: #0A7A51;
-  --color-violet: #6C5CE7;
-  --color-blue: #2F6FE4;
-  --color-amber: #A16207;
-  --color-accent-ink: #FFFFFF;
-  --color-navy: #101322;
-  --color-navy2: #1A1F33;
-  --color-green-bright: #5CE68F;
-  --color-blue-bright: #54B2FD;
-  --color-amber-bright: #FDCB59;
+  /* ---- surfaces (near-black base, navy-tinted depth) ---- */
+  --color-bg: #070809;
+  --color-bg2: #0a0c0f;
+  --color-surface: #0e1116;
+  --color-surface2: #131822;
+  --color-surface3: #191f2b;
+
+  /* ---- lines ---- */
+  --color-line: rgba(255, 255, 255, 0.07);
+  --color-line2: rgba(255, 255, 255, 0.12);
+  --color-line3: rgba(255, 255, 255, 0.2);
+
+  /* ---- text ---- */
+  --color-ink: #f5f7fa;
+  --color-muted: #9aa6b4;
+  --color-faint: #616b78;
+
+  /* ---- accent: cyan rim light (primary) ---- */
+  --color-accent: #4fc3ff;
+  --color-accent-dim: #38a8e6;
+  --color-accent-deep: #1b6ea8;
+
+  /* ---- signal states (green ONLY for system states) ---- */
+  --color-signal: #6ff0a6;
+  --color-signal-dim: #3fbd7e;
+  --color-warn: #f5c451;
+  --color-critical: #ff6b6b;
+
+  --color-accent-ink: #05141f;
 
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
   --font-brand: var(--font-brand-mont), var(--font-inter), sans-serif;
 
-  --radius-card: 8px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-bg);
 }
 
 body {
@@ -41,61 +52,140 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: #ffffff;
+  color: #04121c;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--color-surface2);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line2);
+  border-radius: 8px;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @layer components {
   .wrap {
-    @apply mx-auto max-w-[1120px] px-6;
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-12;
   }
 
   .btn,
   .btn-primary,
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full border border-transparent px-5 py-2.5 font-sans text-[13px] font-semibold whitespace-nowrap transition-all duration-150;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sans text-[13.5px] font-medium whitespace-nowrap transition-all duration-200;
   }
 
+  /* ivory primary per brief: light bg, dark text */
   .btn-primary {
-    @apply bg-accent text-white hover:bg-accent-dim;
+    @apply bg-ink text-[#0a0c0f] hover:bg-white;
   }
 
   .btn-ghost {
-    @apply border-line2 text-ink hover:border-ink/30 hover:bg-white;
-  }
-
-  .kicker {
-    @apply mb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-accent;
+    @apply border border-line2 text-ink hover:border-line3 hover:bg-white/[0.04];
   }
 
   .section {
-    @apply border-t border-line py-20 md:py-24;
+    @apply border-t border-line py-20 md:py-28;
   }
 
-  .card {
-    @apply rounded-lg border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(1,1,30,0.04)] transition-colors duration-150 hover:border-line2 hover:bg-surface2;
+  /* uppercase mono section label */
+  .kicker {
+    @apply mb-5 inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.22em] uppercase text-faint;
   }
 
-  .card-icon {
-    @apply mb-4 h-6 w-6 text-accent;
+  .surface-card {
+    @apply rounded-[var(--radius-lg)] border border-line bg-surface;
   }
 
   .term-window {
-    @apply overflow-hidden rounded-lg border border-line2 bg-navy;
-  }
-
-  .term-body {
-    @apply p-4 font-mono text-[12.5px] leading-[1.8] text-[#A7B0C8];
+    @apply overflow-hidden rounded-[var(--radius-md)] border border-line2 bg-[#08090b];
   }
 }
 
+/* ---- rim-lit glow used by the runtime enclosure & orbs ---- */
+.rim-glow {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 60px rgba(79, 195, 255, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 30px 80px -20px rgba(0, 0, 0, 0.8);
+}
+
+/* vertical fluting texture (reference blinds) */
+.fluting {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.022) 0px,
+    rgba(255, 255, 255, 0.022) 1px,
+    transparent 1px,
+    transparent 26px
+  );
+}
+
+/* faint engineering grid */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ---------- deterministic motion primitives (CSS only) ---------- */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes draw {
+  from { stroke-dashoffset: var(--dash, 200); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes flow {
+  from { stroke-dashoffset: 40; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes orbit-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.flow-line { stroke-dasharray: 4 6; animation: flow 1.4s linear infinite; }
+.breathe { animation: breathe 5s ease-in-out infinite; }
+
+/* scroll-reveal helper (progressive enhancement; visible by default) */
+.reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
-    transition: none !important;
-    animation: none !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }

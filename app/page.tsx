@@ -2,22 +2,25 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/home/hero";
-import { ProductTabs } from "@/components/home/product-tabs";
-import { Problem } from "@/components/home/problem";
+import { Procurement } from "@/components/home/procurement";
+import { ExecutionLifecycle } from "@/components/home/execution-lifecycle";
+import { Primitives } from "@/components/home/primitives";
 import { Architecture } from "@/components/home/architecture";
-import { Capabilities } from "@/components/home/capabilities";
 import { Security } from "@/components/home/security";
+import { Infrastructure } from "@/components/home/infrastructure";
+import { UseCases } from "@/components/home/use-cases";
+import { Convergence } from "@/components/home/convergence";
 import { Cta } from "@/components/home/cta";
 
 export const metadata: Metadata = {
-  title: "Privileged — AI Infrastructure for Law",
+  title: "Privileged — Private AI Infrastructure for Legal",
   description:
-    "Privileged is the ephemeral inference layer for legal AI. Ephemeral containers, static-IP egress, and zero-data retention — built in, not negotiated.",
+    "Run AI over privileged data in isolated, ephemeral compute. Requests execute in protected environments, exit through controlled static egress, and leave no persistent session state behind.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Privileged — AI Infrastructure for Law",
+    title: "Privileged — Private AI Infrastructure for Legal",
     description:
-      "Ephemeral containers. Static IPs. Zero-data retention. One DPA, signed in days — not months.",
+      "Ephemeral by default. Privileged by design. Isolated ephemeral compute, static egress, private models, and one security boundary for legal workloads.",
     type: "website",
     url: "https://privilegedinfra.com",
   },
@@ -29,11 +32,14 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Hero />
-        <ProductTabs />
-        <Problem />
+        <Procurement />
+        <ExecutionLifecycle />
+        <Primitives />
         <Architecture />
-        <Capabilities />
         <Security />
+        <Infrastructure />
+        <UseCases />
+        <Convergence />
         <Cta />
       </main>
       <Footer />
