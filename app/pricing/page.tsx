@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Button, Kicker } from "@/components/ui";
+import { Button, Container, Kicker, MonoLabel } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Pricing — Privileged",
   description:
-    "Simple pricing for ephemeral legal AI inference. Free during early access, per-inference for firms, annual for enterprise — one DPA, no minimum spend.",
+    "Pricing for private, ephemeral legal AI inference. Free during early access, usage-based for firms, annual for enterprise — one DPA, no minimum spend.",
   alternates: { canonical: "/pricing/" },
   openGraph: {
     title: "Pricing — Privileged",
     description:
-      "Simple pricing for ephemeral legal AI inference — one DPA, no minimum spend.",
+      "Pricing for private, ephemeral legal AI inference — one DPA, no minimum spend.",
     type: "website",
     url: "https://privilegedinfra.com/pricing/",
   },
@@ -24,10 +23,10 @@ type Tier = {
   priceNote: string;
   blurb: string;
   features: string[];
-  extra?: string[];
   cta: string;
   subject: string;
   variant: "primary" | "ghost";
+  featured?: boolean;
 };
 
 const TIERS: Tier[] = [
@@ -36,13 +35,13 @@ const TIERS: Tier[] = [
     price: "Free",
     priceNote: "during early access",
     blurb:
-      "The full ephemeral runtime for pilots and evaluation builds — same zero-retention guarantees from day one.",
+      "The full ephemeral runtime for pilots and evaluation builds — same zero-retention defaults from day one.",
     features: [
-      "Ephemeral inference containers",
-      "Zero-data retention",
-      "Static-IP egress",
-      "LoRA hot-swap",
-      "White-label data feeds",
+      "Ephemeral execution",
+      "Zero retention by default",
+      "Static egress",
+      "OpenAI-compatible API",
+      "Private & open models",
     ],
     cta: "Start building",
     subject: "Privileged — Developer tier",
@@ -50,31 +49,33 @@ const TIERS: Tier[] = [
   },
   {
     name: "Firm",
-    price: "Custom",
-    priceNote: "per-inference pricing",
+    price: "Usage-based",
+    priceNote: "per inference",
     blurb:
       "Production inference over privileged matter data. No minimum spend, no vendor-by-vendor audits.",
     features: [
       "Everything in Developer",
       "No training on your data",
-      "Hardware-level isolation",
-      "One pre-audited DPA",
+      "Graduated isolation classes",
+      "One DPA",
+      "Audit log & usage export",
     ],
     cta: "Talk to us",
     subject: "Privileged — Firm tier",
     variant: "primary",
+    featured: true,
   },
   {
     name: "Enterprise",
     price: "Custom",
     priceNote: "annual",
     blurb:
-      "Firm-wide deployment with dedicated infrastructure, audit support, and custom egress configuration.",
-    features: ["Everything in Firm"],
-    extra: [
+      "Firm-wide deployment with dedicated infrastructure, security-review support, and custom egress.",
+    features: [
+      "Everything in Firm",
       "Dedicated gateway",
-      "SOC2 / custom audit support",
-      "Priority support",
+      "Security-review support",
+      "Customer-managed keys",
       "Custom egress IPs",
     ],
     cta: "Talk to sales",
@@ -83,256 +84,115 @@ const TIERS: Tier[] = [
   },
 ];
 
+const INCLUDED = [
+  ["Zero retention by default", "Prompts, responses, and documents are not written to durable storage in the paths Privileged controls."],
+  ["No training on your data", "Customer data is never used to train, fine-tune, or evaluate any model — by contract and construction."],
+  ["Static, controlled egress", "Traffic exits through a fixed infrastructure identity your firewall can whitelist. Deny by default."],
+  ["Encryption", "TLS 1.3 in transit; encryption at rest with customer-managed keys available for stored data."],
+  ["One DPA", "A single agreement, signed in days — not five vendor negotiations across months."],
+  ["Tenant isolation", "Org/project scoping, row-level security, and single-tenant runtimes with graduated isolation classes."],
+];
+
 function Check() {
   return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="mt-[2px] h-4 w-4 shrink-0 text-accent"
-    >
-      <path
-        d="M2.75 8.5l3.25 3.25L13.25 4.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent">
+      <path d="M2.75 8.5l3.25 3.25L13.25 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-
-const INCLUDED: {
-  title: string;
-  body: string;
-  icon: ReactNode;
-}[] = [
-  {
-    title: "Zero-data retention",
-    body: "Prompts, context, and generated tokens live only in RAM. Nothing touches disk, and session memory is wiped at termination.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <path d="M20 12a8 8 0 1 1-2.34-5.66" />
-        <path d="M20 3v5h-5" />
-      </svg>
-    ),
-  },
-  {
-    title: "No training on your data",
-    body: "Your data is never used to train, fine-tune, or evaluate any model — contractual and architectural.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="m5.6 5.6 12.8 12.8" />
-      </svg>
-    ),
-  },
-  {
-    title: "Static-IP egress",
-    body: "All traffic exits through a fixed, high-availability gateway. Whitelist it once, forever.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18" />
-        <path d="M12 3a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-  },
-  {
-    title: "TLS 1.3 + AES-256",
-    body: "Encryption in transit and at rest, with customer-managed keys for any stored model data.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
-        <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
-      </svg>
-    ),
-  },
-  {
-    title: "One DPA",
-    body: "A single pre-audited agreement, signed in days — not five vendor negotiations in months.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <rect x="5" y="3" width="14" height="18" rx="2" />
-        <path d="m9 13 2 2 4-4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Hardware-level isolation",
-    body: "Each session runs in isolated compute. Memory is discarded and rendered unrecoverable on termination.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-        className="h-5 w-5"
-      >
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-        <rect x="9.5" y="9.5" width="5" height="5" />
-        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
-      </svg>
-    ),
-  },
-];
 
 export default function Pricing() {
   return (
     <>
       <Nav />
       <main id="main">
-        <section className="wrap pb-16 pt-[110px]">
+        <Container className="pt-24 pb-14">
           <Kicker>Pricing</Kicker>
-          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink">
+          <h1 className="max-w-[16ch] text-[clamp(34px,5vw,58px)] leading-[1.04] font-semibold tracking-[-0.03em] text-ink">
             Simple by design.
           </h1>
-          <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-muted">
+          <p className="mt-5 max-w-[54ch] text-[16px] leading-[1.6] text-muted">
             Early access is limited to a small set of firms. No minimum spend.
             One DPA covers everything — every model, every feed, every tier.
           </p>
-        </section>
+        </Container>
 
-        <section className="wrap pb-[100px]">
-          <div className="grid grid-cols-1 gap-3 min-[900px]:grid-cols-3">
+        <Container className="pb-24">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
             {TIERS.map((t) => (
               <div
                 key={t.name}
-                className={`flex flex-col rounded-lg border p-6 shadow-[0_1px_2px_rgba(1,1,30,0.04)] transition-colors duration-150 hover:bg-surface2 ${
-                  t.name === "Firm"
-                    ? "border-accent/50 bg-accent/[0.03] ring-1 ring-accent/20"
-                    : "border-line bg-white hover:border-line2"
+                className={`flex flex-col rounded-[var(--radius-lg)] border p-7 ${
+                  t.featured
+                    ? "border-accent/45 bg-accent/[0.05] rim-glow"
+                    : "border-line bg-surface"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="font-mono text-[11px] tracking-[0.14em] text-faint uppercase">
-                    {t.name}
-                  </h3>
-                  {t.name === "Firm" ? (
+                  <MonoLabel>{t.name}</MonoLabel>
+                  {t.featured ? (
                     <span className="font-mono text-[10px] tracking-[0.14em] text-accent uppercase">
                       Built for firms
                     </span>
                   ) : null}
                 </div>
-                <div className="mt-3 flex items-baseline">
-                  <span className="font-mono text-[22px] leading-none text-ink">
+                <div className="mt-4 flex items-baseline gap-2.5">
+                  <span className="text-[24px] leading-none font-semibold tracking-[-0.02em] text-ink">
                     {t.price}
                   </span>
-                  <span className="ml-2.5 text-[12px] text-muted">
-                    {t.priceNote}
-                  </span>
+                  <span className="text-[12px] text-faint">{t.priceNote}</span>
                 </div>
-                <p className="mt-2 text-[13px] leading-[1.6] text-muted">
+                <p className="mt-3 text-[13.5px] leading-[1.6] text-muted">
                   {t.blurb}
                 </p>
-                <ul className="mt-5 flex-1 space-y-2.5">
-                  {[...t.features, ...(t.extra ?? [])].map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2.5 text-[13px] text-muted"
-                    >
+                <ul className="mt-6 flex-1 space-y-2.5">
+                  {t.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-[13.5px] text-muted">
                       <Check />
                       <span>{f}</span>
                     </li>
                   ))}
                 </ul>
                 <Button
-                  href={`mailto:hello@privilegedinfra.com?subject=${encodeURIComponent(
-                    t.subject,
-                  )}`}
+                  href={`mailto:hello@privilegedinfra.com?subject=${encodeURIComponent(t.subject)}`}
                   variant={t.variant}
-                  className="mt-6 w-full justify-center"
+                  className="mt-7 w-full"
                 >
                   {t.cta}
                 </Button>
               </div>
             ))}
           </div>
-        </section>
+        </Container>
 
-        <section className="border-t border-line py-20 md:py-24">
-          <div className="wrap">
+        <section className="section">
+          <Container>
             <Kicker>Included everywhere</Kicker>
-            <h2 className="max-w-[26ch] text-[clamp(24px,3.4vw,36px)] leading-[1.15] font-semibold tracking-[-0.03em]">
-              What's included in every tier
+            <h2 className="max-w-[24ch] text-[clamp(26px,3.4vw,40px)] leading-[1.08] font-semibold tracking-[-0.03em] text-ink">
+              Security is not a pricing tier.
             </h2>
-            <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-muted">
-              The guarantees that matter to procurement and IT hold across the
-              board — no tier gates on security.
+            <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.6] text-muted">
+              The controls procurement and IT care about hold across every tier.
+              No plan gates the security posture.
             </p>
-            <div className="mt-12 grid grid-cols-1 gap-3 min-[560px]:grid-cols-2 min-[900px]:grid-cols-3">
-              {INCLUDED.map((c) => (
-                <div
-                  key={c.title}
-                  className="rounded-lg border border-line bg-white p-5 shadow-[0_1px_2px_rgba(1,1,30,0.04)] transition-colors duration-150 hover:border-line2 hover:bg-surface2"
-                >
-                  <div className="mb-3 text-accent">{c.icon}</div>
-                  <h3 className="text-[14.5px] font-medium text-ink">
-                    {c.title}
-                  </h3>
-                  <p className="mt-2 text-[13px] leading-[1.6] text-muted">
-                    {c.body}
-                  </p>
+            <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+              {INCLUDED.map(([title, body]) => (
+                <div key={title} className="bg-surface p-6">
+                  <h3 className="text-[14.5px] font-medium text-ink">{title}</h3>
+                  <p className="mt-2 text-[13px] leading-[1.6] text-muted">{body}</p>
                 </div>
               ))}
             </div>
-          </div>
+            <p className="mt-6 font-mono text-[11px] text-faint">
+              No certification is claimed. Privileged builds toward SOC 2 / ISO 27001 readiness; ask for the current security posture.
+            </p>
+          </Container>
         </section>
 
-        <section className="border-t border-line py-16">
-          <div className="wrap text-center">
+        <section className="section text-center">
+          <Container>
             <Kicker>Questions?</Kicker>
-            <p className="text-[13.5px] text-muted">
-              hello@privilegedinfra.com
-            </p>
+            <p className="text-[14px] text-muted">hello@privilegedinfra.com</p>
             <Button
               href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Contact"
               variant="ghost"
@@ -340,7 +200,7 @@ export default function Pricing() {
             >
               Email us
             </Button>
-          </div>
+          </Container>
         </section>
       </main>
       <Footer />

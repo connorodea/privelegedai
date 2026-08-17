@@ -10,25 +10,13 @@ const MARK_PATH =
   "M 25.400 32.500 A 6.600 6.600 0 1 0 38.600 32.500 A 6.600 6.600 0 1 0 25.400 32.500 Z " +
   "M 30.152 34.810 L 30.152 45.040 A 1.848 1.848 0 0 0 33.848 45.040 L 33.848 34.810 Z";
 
-const FONT_VARS: Record<string, string> = {
-  mont: "var(--font-brand-mont)",
-  espera: "var(--font-brand-espera)",
-  noname: "var(--font-brand-noname)",
-  barq: "var(--font-brand-barq)",
-  circula: "var(--font-brand-circula)",
-  identidad: "var(--font-brand-identidad)",
-  stark: "var(--font-brand-stark)",
-  santana: "var(--font-brand-santana)",
-  generica: "var(--font-brand-generica)",
-};
-
 export function Mark({ className = "" }: { className?: string }) {
   return (
     <svg
       className={className}
       viewBox="0 0 64 64"
-      aria-hidden="true"
-      focusable="false"
+      role="img"
+      aria-label="Privileged mark"
     >
       <path d={MARK_PATH} fill="currentColor" fillRule="evenodd" />
     </svg>
@@ -36,21 +24,18 @@ export function Mark({ className = "" }: { className?: string }) {
 }
 
 export function Logo({
-  font = "mont",
   className = "",
-  markClass = "h-[0.9em] w-[0.9em]",
+  markClass = "h-[0.95em] w-[0.95em]",
   showMark = true,
 }: {
-  font?: keyof typeof FONT_VARS;
   className?: string;
   markClass?: string;
   showMark?: boolean;
 }) {
-  const fontFamily = FONT_VARS[font] ?? FONT_VARS.mont;
   return (
     <span
       className={`inline-flex items-center gap-[0.45em] leading-none ${className}`}
-      style={{ fontFamily }}
+      style={{ fontFamily: "var(--font-brand-mont)" }}
       aria-label="Privileged"
     >
       {showMark ? <Mark className={markClass} /> : null}

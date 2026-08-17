@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { Button, Container, Kicker } from "@/components/ui";
+import { Button, Container, Kicker, MonoLabel } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Docs — Privileged",
   description:
-    "Privileged in five minutes: sign the DPA, whitelist our static IP, and run your first model with ephemeral containers and zero-data retention.",
+    "Privileged in five minutes: sign the DPA, whitelist static egress, and run your first model through an OpenAI-compatible API with ephemeral, zero-retention execution.",
   alternates: { canonical: "/docs/" },
   openGraph: {
     title: "Docs — Privileged",
     description:
-      "Privileged in five minutes: sign the DPA, whitelist our static IP, and run your first model with ephemeral containers and zero-data retention.",
+      "Sign the DPA, whitelist static egress, and run your first model with ephemeral, zero-retention execution.",
     type: "website",
     url: "https://privilegedinfra.com/docs/",
   },
@@ -19,84 +19,34 @@ export const metadata: Metadata = {
 
 const STEPS = [
   {
+    n: "01",
     title: "Sign the DPA",
-    body: "One pre-audited Data Processing Agreement — zero retention, no training, hardware-level isolation. Signed in days, not months.",
+    body: "One Data Processing Agreement covering zero retention by default, no training on your data, and tenant isolation. Signed in days, not months.",
   },
   {
-    title: "Whitelist our static IP",
-    body: "All egress flows through a fixed, high-availability gateway. Add it to your firewall once, and you're done — forever.",
+    n: "02",
+    title: "Whitelist static egress",
+    body: "Traffic exits through a fixed infrastructure identity. Add it to your firewall once. Default egress posture is deny unless explicitly allowed.",
   },
   {
-    title: "Run your first model",
-    body: "One command. The container spins up, streams tokens, and is decommissioned the instant the stream closes.",
-    code: "privileged run --model client-vault:latest",
+    n: "03",
+    title: "Call the API",
+    body: "Point your existing OpenAI-compatible client at the Privileged gateway. The runtime provisions, streams, and is destroyed when the session closes.",
   },
 ];
 
 const CONCEPTS = [
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-        <path d="M4 17l6-6-6-6" />
-        <path d="M12 19h8" />
-      </svg>
-    ),
-    title: "Ephemeral containers",
-    body: "Containers spin up, load your model, and vanish the instant the token stream closes. Nothing touches disk.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18" />
-        <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18" />
-      </svg>
-    ),
-    title: "Static-IP egress",
-    body: "All traffic exits through a fixed, high-availability gateway your firm's firewall can whitelist once, forever.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
-      </svg>
-    ),
-    title: "LoRA hot-swap",
-    body: "Hot-swap LoRA adapters in milliseconds — one base model, infinite firm-specific customizations.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-        <path d="M12 20h8M12 4h8M4 12l4 4 4-8" />
-      </svg>
-    ),
-    title: "White-label data",
-    body: "Bundle premium case-law, docket, and regulatory feeds under one brand — with revenue-share for data partners.",
-  },
+  ["Ephemeral runtime", "Environments provision on demand, run in RAM, and are destroyed on session close. No persistent disk is attached to a privileged workload."],
+  ["Static egress", "All traffic exits through controlled, static egress with a fixed identity your firewall can whitelist. Deny by default."],
+  ["Private models", "Host private and fine-tuned models in isolated environments, or run open models — all through one logical identifier. LoRA adapters supported."],
+  ["Zero retention by default", "Prompts, responses, and documents are not written to durable storage in the paths Privileged controls. Persistent workflows are opt-in."],
 ];
 
 const SECURITY = [
-  {
-    control: "Zero retention",
-    impl: "User Data is processed strictly in temporary, volatile memory (RAM). On Session termination, no copy, snapshot, or reconstruction survives.",
-    dpa: "§3 – §4",
-  },
-  {
-    control: "No training",
-    impl: "User Data is never used to train, fine-tune, evaluate, or develop any model — public or private, for Privileged or any third party.",
-    dpa: "§5",
-  },
-  {
-    control: "Encryption",
-    impl: "TLS 1.3 in transit; AES-256 at rest with customer-managed keys. Privileged cannot decrypt stored data without the Firm's key release.",
-    dpa: "§6",
-  },
-  {
-    control: "Hardware-level isolation",
-    impl: "Each Session runs in an isolated compute environment. Memory assigned to a Session is discarded and rendered unrecoverable at termination.",
-    dpa: "§3.3 · §7",
-  },
+  ["Zero retention", "Execution data is processed in RAM-only scratch. Only payload-free metadata is retained by default.", "DPA §3–4"],
+  ["No training", "Customer data is never used to train, fine-tune, or evaluate any model — for Privileged or any third party.", "DPA §5"],
+  ["Encryption", "TLS 1.3 in transit; encryption at rest with customer-managed keys available for stored data.", "DPA §6"],
+  ["Tenant isolation", "Org/project scoping, row-level security, and single-tenant runtimes. Graduated isolation classes.", "DPA §7"],
 ];
 
 export default function Docs() {
@@ -105,183 +55,92 @@ export default function Docs() {
       <Nav />
       <main id="main">
         <Container className="pt-24 pb-16">
-          <Kicker>Docs</Kicker>
-          <h1 className="max-w-[18ch] font-sans text-[clamp(34px,5vw,52px)] leading-[1.1] font-semibold tracking-[-0.03em] text-ink">
+          <Kicker tone="accent">Docs</Kicker>
+          <h1 className="max-w-[18ch] text-[clamp(34px,5vw,58px)] leading-[1.04] font-semibold tracking-[-0.03em] text-ink">
             Privileged in five minutes.
           </h1>
-          <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-muted">
-            One DPA, one firewall rule, one CLI command. Everything below ships
-            as engineered defaults — nothing to negotiate, nothing persists.
+          <p className="mt-5 max-w-[56ch] text-[16px] leading-[1.6] text-muted">
+            One DPA, one firewall rule, one API. Everything below ships as an
+            engineered default — nothing to negotiate, nothing persists by
+            default.
           </p>
         </Container>
 
+        {/* quickstart */}
         <section className="section">
           <Container>
             <Kicker>Quickstart</Kicker>
-            <h2 className="text-[clamp(22px,3vw,32px)] leading-[1.15] font-semibold tracking-[-0.03em]">
-              Run privileged inference in three steps.
-            </h2>
-            <div className="mt-12 grid items-start gap-12 min-[900px]:grid-cols-[1.2fr_1fr]">
-              <div className="term-window max-w-[620px] border-navy2">
-                <div
-                  aria-hidden
-                  className="flex items-center gap-[7px] border-b border-line bg-white/[0.02] px-4 py-3"
-                >
-                  <span className="h-[9px] w-[9px] rounded-full bg-[#FF5F57]" />
-                  <span className="h-[9px] w-[9px] rounded-full bg-[#FFBD2E]" />
-                  <span className="h-[9px] w-[9px] rounded-full bg-[#27CA40]" />
-                  <span className="ml-2 font-mono text-[11px] text-[#5C6378]">
-                    privileged run — ephemeral container lifecycle
+            <div className="mt-10 grid gap-4 md:grid-cols-3 md:gap-5">
+              {STEPS.map((s) => (
+                <div key={s.n} className="surface-card p-6">
+                  <span className="grid h-8 w-8 place-items-center rounded-full border border-accent/40 font-mono text-[12px] text-accent">
+                    {s.n}
                   </span>
+                  <h3 className="mt-5 text-[16px] font-medium text-ink">{s.title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-[1.6] text-muted">{s.body}</p>
                 </div>
-                <div className="term-body">
-                  <span className="text-[#5C6378]">$</span>{" "}
-                  <span className="text-green-bright">
-                    privileged run --model client-vault:latest
-                  </span>
-                  <br />
-                  <span className="text-[#5C6378]">container:</span>{" "}
-                  <span className="text-blue-bright">eph-a3f2b1c</span>{"  "}
-                  <span className="text-[#5C6378]">ip:</span>{" "}
-                  <span className="text-amber-bright">5.161.239.237</span>{"  "}
-                  <span className="text-[#5C6378]">status:</span>{" "}
-                  <span className="text-blue-bright">ready</span>
-                  <br />
-                  <span className="text-[#5C6378]">stream:</span>{" "}
-                  token-0 → token-1 → ... → token-n
-                  <br />
-                  <span className="text-[#5C6378]">stream closed</span> —{" "}
-                  <span className="text-blue-bright">container decommissioned</span>
-                  <br />
-                  <span className="text-[#5C6378]">persistence:</span> none
-                  &nbsp;|&nbsp;{" "}
-                  <span className="text-[#5C6378]">data written to disk:</span> 0
-                  bytes
-                  <br />
-                </div>
+              ))}
+            </div>
+
+            <div className="term-window mt-6">
+              <div className="flex items-center gap-2 border-b border-line px-4 py-3">
+                <span className="font-mono text-[11px] text-faint">example · chat completion</span>
               </div>
-              <ol className="grid gap-7">
-                {STEPS.map((s, i) => (
-                  <li key={s.title} className="flex gap-4">
-                    <span className="grid h-7 w-7 flex-none place-items-center rounded-md border border-line bg-bg3 font-mono text-[12px] text-faint">
-                      0{i + 1}
-                    </span>
-                    <div>
-                      <h3 className="text-[14px] font-medium text-ink">
-                        {s.title}
-                      </h3>
-                      <p className="mt-1 text-[13.5px] leading-[1.65] text-muted">
-                        {s.body}
-                      </p>
-                      {s.code ? (
-                        <code className="mt-2 block font-mono text-[12.5px] text-accent">
-                          {s.code}
-                        </code>
-                      ) : null}
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <pre className="overflow-x-auto p-5 font-mono text-[12.5px] leading-[1.8] text-muted">
+                <span className="text-signal">curl</span> https://api.privilegedinfra.com/v1/chat/completions \{"\n"}
+                {"  "}-H <span className="text-accent">&quot;Authorization: Bearer pi_live_•••&quot;</span> \{"\n"}
+                {"  "}-H <span className="text-accent">&quot;Content-Type: application/json&quot;</span> \{"\n"}
+                {"  "}-d <span className="text-accent">&apos;&#123;&quot;model&quot;:&quot;privileged/legal-large&quot;,&quot;messages&quot;:[…],&quot;stream&quot;:true&#125;&apos;</span>
+              </pre>
             </div>
           </Container>
         </section>
 
+        {/* concepts */}
         <section className="section">
           <Container>
             <Kicker>Concepts</Kicker>
-            <h2 className="text-[clamp(22px,3vw,32px)] leading-[1.15] font-semibold tracking-[-0.03em]">
-              Four primitives, one platform.
-            </h2>
-            <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-muted">
-              Every capability is engineered into the runtime — not retrofitted
-              via policy.
-            </p>
-            <div className="mt-12 grid gap-3 md:grid-cols-2">
-              {CONCEPTS.map((c) => (
-                <div
-                  key={c.title}
-                  className="card p-5"
-                >
-                  <div className="mb-4 h-5 w-5 text-accent">{c.icon}</div>
-                  <h3 className="text-[14.5px] font-medium text-ink">
-                    {c.title}
-                  </h3>
-                  <p className="mt-2 text-[13px] leading-[1.65] text-muted">
-                    {c.body}
-                  </p>
+            <div className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2">
+              {CONCEPTS.map(([title, body]) => (
+                <div key={title} className="bg-surface p-6">
+                  <h3 className="text-[15px] font-medium text-ink">{title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-[1.6] text-muted">{body}</p>
                 </div>
               ))}
             </div>
           </Container>
         </section>
 
+        {/* security table */}
         <section className="section">
           <Container>
-            <Kicker>Security & compliance</Kicker>
-            <h2 className="text-[clamp(22px,3vw,32px)] leading-[1.15] font-semibold tracking-[-0.03em]">
-              The checklist your counsel will read.
-            </h2>
-            <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-muted">
-              Highlights from the Privileged Data Processing Agreement, with
-              the section references your outside counsel can cite.
-            </p>
-            <div className="mt-10 overflow-hidden rounded-lg border border-line bg-white">
-              <div className="grid max-[750px]:hidden grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line bg-bg3">
-                <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.12em] uppercase text-faint">
-                  Control
-                </div>
-                <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.12em] uppercase text-faint">
-                  Implementation
-                </div>
-                <div className="px-5 py-4 font-mono text-[10.5px] tracking-[0.12em] uppercase text-faint">
-                  In the DPA
-                </div>
+            <Kicker>Security controls</Kicker>
+            <div className="surface-card mt-10 overflow-hidden">
+              <div className="grid grid-cols-[1fr_1.8fr_auto] border-b border-line max-[700px]:hidden">
+                <div className="px-5 py-3"><MonoLabel>Control</MonoLabel></div>
+                <div className="px-5 py-3"><MonoLabel>Implementation</MonoLabel></div>
+                <div className="px-5 py-3"><MonoLabel>DPA</MonoLabel></div>
               </div>
-              {SECURITY.map((r) => (
+              {SECURITY.map(([c, impl, dpa]) => (
                 <div
-                  key={r.control}
-                  className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line last:border-b-0 max-[750px]:grid-cols-1"
+                  key={c}
+                  className="grid grid-cols-[1fr_1.8fr_auto] border-b border-line text-[13.5px] last:border-b-0 max-[700px]:grid-cols-1 max-[700px]:gap-1 max-[700px]:py-3"
                 >
-                  <div className="px-5 py-4 text-[13px] font-semibold text-ink max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                    <span className="hidden font-mono text-[10.5px] tracking-[0.06em] uppercase text-muted max-[750px]:inline">
-                      Control:{" "}
-                    </span>
-                    {r.control}
-                  </div>
-                  <div className="px-5 py-4 text-[13px] leading-[1.65] text-muted max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                    <span className="hidden font-mono text-[10.5px] tracking-[0.06em] uppercase text-muted max-[750px]:inline">
-                      Implementation:{" "}
-                    </span>
-                    {r.impl}
-                  </div>
-                  <div className="px-5 py-4 font-mono text-[13px] text-accent max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                    <span className="hidden font-mono text-[10.5px] tracking-[0.06em] uppercase text-muted max-[750px]:inline">
-                      In the DPA:{" "}
-                    </span>
-                    {r.dpa}
-                  </div>
+                  <div className="px-5 py-4 font-medium text-ink max-[700px]:py-1">{c}</div>
+                  <div className="px-5 py-4 text-muted max-[700px]:py-1">{impl}</div>
+                  <div className="px-5 py-4 font-mono text-[11px] text-accent max-[700px]:py-1">{dpa}</div>
                 </div>
               ))}
             </div>
-          </Container>
-        </section>
-
-        <section className="border-t border-line py-14">
-          <Container className="text-center">
-            <Kicker>Support</Kicker>
-            <h2 className="mx-auto max-w-[22ch] text-[clamp(22px,3vw,32px)] leading-[1.15] font-semibold tracking-[-0.03em]">
-              Questions for your counsel?
-            </h2>
-            <p className="mx-auto mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-muted">
-              The full DPA template is available for review by counsel on both
-              sides. Email us and we'll send it over.
+            <p className="mt-5 font-mono text-[11px] text-faint">
+              Zero retention applies within the boundaries Privileged controls. Persistent workflows are opt-in. No certification is claimed.
             </p>
-            <div className="mt-8 flex justify-center">
-              <Button
-                variant="ghost"
-                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Docs%20Support"
-              >
-                Email the team
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access" arrow>
+                Request access
+              </Button>
+              <Button href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Security%20review" variant="ghost">
+                Start security review
               </Button>
             </div>
           </Container>

@@ -1,28 +1,31 @@
 import Link from "next/link";
 import { Logo } from "./logo";
+import { StatusDot } from "./ui";
 
 const COLS = [
   {
     title: "Product",
     links: [
-      { href: "/", label: "Overview" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/docs", label: "Docs" },
-      { href: "/use-cases", label: "Use cases" },
-      { href: "/faq", label: "FAQ" },
+      { href: "/#product", label: "Runtime" },
+      { href: "/#architecture", label: "Network" },
+      { href: "/#product", label: "Models" },
+      { href: "/#product", label: "Data" },
+    ],
+  },
+  {
+    title: "Security",
+    links: [
+      { href: "/#architecture", label: "Architecture" },
+      { href: "/#security", label: "Trust" },
+      { href: "/docs", label: "DPA" },
+      { href: "/docs", label: "Documentation" },
     ],
   },
   {
     title: "Company",
     links: [
-      {
-        href: "mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Early%20Access",
-        label: "Early access",
-      },
-      {
-        href: "mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Partnership",
-        label: "Partner with us",
-      },
+      { href: "/#use-cases", label: "Use cases" },
+      { href: "/pricing", label: "Pricing" },
       {
         href: "mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Contact",
         label: "Contact",
@@ -40,21 +43,22 @@ const COLS = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink py-16 text-white">
+    <footer className="border-t border-line bg-bg2 py-16">
       <div className="wrap">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
           <div className="col-span-2">
-            <Logo className="text-[17px] text-white" />
-            <p className="mt-4 max-w-[30ch] text-[13px] leading-relaxed text-white/60">
-              The ephemeral inference layer for legal AI. Nothing persists.
+            <Logo className="text-[17px] text-ink" />
+            <p className="mt-4 max-w-[32ch] text-[13.5px] leading-[1.6] text-muted">
+              Private AI infrastructure for legal and other highly sensitive
+              workloads. Ephemeral by default. Privileged by design.
             </p>
-            <p className="mt-6 font-mono text-[11px] tracking-[0.08em] text-white/40">
+            <p className="mt-6 font-mono text-[11px] tracking-[0.08em] text-faint">
               privilegedinfra.com
             </p>
           </div>
           {COLS.map((col) => (
             <div key={col.title}>
-              <div className="mb-4 font-mono text-[11px] tracking-[0.14em] uppercase text-white/40">
+              <div className="mb-4 font-mono text-[11px] tracking-[0.16em] text-faint uppercase">
                 {col.title}
               </div>
               <ul className="space-y-2.5">
@@ -62,7 +66,7 @@ export function Footer() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-[13px] text-white/70 transition-colors hover:text-white"
+                      className="text-[13.5px] text-muted transition-colors hover:text-ink"
                     >
                       {l.label}
                     </Link>
@@ -72,10 +76,12 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-[12px] text-white/50">
-          <span>© 2026 Privileged Infra. All rights reserved.</span>
-          <span>
-            Ephemeral inference · Static-IP egress · Zero-data retention
+
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6 text-[12px] text-faint">
+          <span>© 2026 Privileged Infra</span>
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.12em]">
+            <StatusDot tone="signal" />
+            EPHEMERAL INFERENCE · STATIC EGRESS · PRIVATE MODELS
           </span>
         </div>
       </div>

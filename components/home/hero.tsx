@@ -1,67 +1,146 @@
-import { Button, Container, Eyebrow } from "@/components/ui";
-import { Terminal } from "./terminal";
+"use client";
 
-const STATS = [
-  { num: "Days", label: "to sign a DPA — not months" },
-  { num: "Zero", label: "data persisted to disk, ever" },
-  { num: "Static IP", label: "firewall whitelisting for BigLaw" },
-  { num: "One DPA", label: "covers every model and feed" },
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { Button, Container, Eyebrow, StatusDot } from "@/components/ui";
+import { useLifecycle } from "@/lib/lifecycle";
+
+const RuntimeOrb = dynamic(() => import("@/components/three/runtime-orb"), {
+  ssr: false,
+  loading: () => <OrbFallback />,
+});
+
+function OrbFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 grid place-items-center"
+    >
+      <div className="h-[62%] w-[62%] rounded-full bg-[radial-gradient(circle_at_50%_40%,rgba(79,195,255,0.35),rgba(12,20,32,0.6)_45%,transparent_70%)] blur-[2px] breathe" />
+      <div className="absolute h-[26%] w-[26%] rounded-full bg-[radial-gradient(circle,rgba(143,227,255,0.9),rgba(79,195,255,0.2)_70%)]" />
+    </div>
+  );
+}
+
+const CHIPS = [
+  "ZERO RETENTION BY DEFAULT",
+  "STATIC EGRESS",
+  "PRIVATE MODELS",
+  "ONE SECURITY BOUNDARY",
 ];
 
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const on = () => setReduced(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return reduced;
+}
+
 export function Hero() {
+  const { phase } = useLifecycle(true);
+  const reduced = useReducedMotion();
+
+  const toneClass =
+    phase.tone === "signal"
+      ? "text-signal"
+      : phase.tone === "accent"
+        ? "text-accent"
+        : "text-faint";
+
   return (
-    <header className="relative overflow-hidden pb-[60px] pt-24">
+    <header className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+      {/* ambient depth */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(1,1,30,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(1,1,30,0.035) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            maskImage:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
-          }}
-        />
-        <div className="absolute top-[-20%] right-[-10%] h-[500px] w-[900px] bg-[radial-gradient(ellipse,rgba(11,143,94,0.12)_0%,transparent_65%)]" />
-        <div className="absolute bottom-[-30%] left-[-15%] h-[600px] w-[800px] bg-[radial-gradient(ellipse,rgba(47,111,228,0.10)_0%,transparent_60%)]" />
+        <div className="fluting absolute inset-0 opacity-70" />
+        <div className="absolute top-[-15%] right-[-5%] h-[560px] w-[880px] bg-[radial-gradient(ellipse,rgba(79,195,255,0.10)_0%,transparent_62%)]" />
+        <div className="absolute bottom-[-25%] left-[-15%] h-[560px] w-[760px] bg-[radial-gradient(ellipse,rgba(27,110,168,0.10)_0%,transparent_60%)]" />
       </div>
+
       <Container className="relative">
-        <Eyebrow>Ephemeral inference for law</Eyebrow>
-        <h1 className="max-w-[22ch] font-sans text-[clamp(40px,6vw,64px)] leading-[1.05] font-semibold tracking-[-0.035em] text-ink">
-          Ephemeral by default.
-          <br />
-          <span className="bg-gradient-to-r from-accent to-blue bg-clip-text text-transparent">
-            Privileged by design.
-          </span>
-        </h1>
-        <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-muted">
-          Containers that spin up, run your model, and vanish the instant the
-          token stream closes. Static-IP egress your firm&apos;s firewall can
-          whitelist once. Zero-data retention engineered in — not negotiated
-          for months.
-        </p>
-        <div className="mt-[34px] flex flex-wrap gap-[14px]">
-          <Button href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Early%20Access">
-            Request early access
-          </Button>
-          <Button href="#product" variant="ghost">
-            See the product
-          </Button>
-        </div>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+          {/* left: copy */}
+          <div>
+            <Eyebrow>Private AI infrastructure for legal</Eyebrow>
+            <h1 className="max-w-[14ch] text-[clamp(46px,7vw,92px)] leading-[0.93] font-semibold tracking-[-0.045em] text-ink">
+              Ephemeral by default.
+              <br />
+              <span className="text-accent">Privileged by design.</span>
+            </h1>
+            <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.6] text-muted">
+              Run AI over privileged data in isolated, ephemeral compute.
+              Requests execute in protected environments, exit through
+              controlled static egress, and leave no persistent session state
+              behind.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button
+                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+                arrow
+              >
+                Request access
+              </Button>
+              <Button href="#architecture" variant="ghost">
+                Explore architecture
+              </Button>
+            </div>
+            <div className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-5 font-mono text-[10.5px] tracking-[0.14em] text-faint">
+              {CHIPS.map((c, i) => (
+                <span key={c} className="inline-flex items-center gap-4">
+                  {i > 0 ? <span className="text-line3">/</span> : null}
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        <Terminal />
+          {/* right: signature runtime enclosure + telemetry */}
+          <div className="relative">
+            <div className="surface-card rim-glow relative overflow-hidden rounded-[20px] bg-[#0a0e14]">
+              <div className="flex items-center justify-between border-b border-line px-5 py-3">
+                <span className="font-mono text-[11px] tracking-[0.14em] text-faint">
+                  PRIVILEGED RUNTIME
+                </span>
+                <span className="inline-flex items-center gap-2 font-mono text-[11px]">
+                  <StatusDot tone={phase.tone} />
+                  <span className={toneClass}>{phase.status}</span>
+                </span>
+              </div>
 
-        <div className="mt-16 grid grid-cols-2 border-t border-line md:grid-cols-4 md:divide-x md:divide-line">
-          {STATS.map((s) => (
-            <div key={s.label} className="py-6">
-              <div className="font-mono text-[20px] text-ink">{s.num}</div>
-              <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
-                {s.label}
+              {/* 3D canvas */}
+              <div className="relative aspect-[4/3.1] w-full">
+                <div className="grid-bg absolute inset-0 opacity-40" aria-hidden="true" />
+                {reduced ? <OrbFallback /> : <RuntimeOrb phase={phase.key} />}
+                {/* phase caption */}
+                <div className="pointer-events-none absolute bottom-4 left-5">
+                  <div className="font-mono text-[10.5px] tracking-[0.14em] text-faint">
+                    {phase.step === "—" ? "" : `${phase.step} ·`} {phase.label.toUpperCase()}
+                  </div>
+                </div>
+              </div>
+
+              {/* telemetry rows */}
+              <div className="grid grid-cols-3 divide-x divide-line border-t border-line font-mono text-[11px]">
+                {phase.lines.map(([k, v]) => (
+                  <div key={k} className="px-4 py-3">
+                    <div className="text-[10px] tracking-[0.12em] text-faint uppercase">
+                      {k}
+                    </div>
+                    <div className="mt-1 truncate text-ink" title={v}>
+                      {v}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+            <p className="mt-3 text-center font-mono text-[10px] tracking-[0.12em] text-faint">
+              PRODUCT VISUALIZATION · ILLUSTRATIVE VALUES
+            </p>
+          </div>
         </div>
       </Container>
     </header>

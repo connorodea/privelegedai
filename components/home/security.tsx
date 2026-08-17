@@ -1,68 +1,79 @@
-import { Container, SectionHeading } from "@/components/ui";
+import { Container, SectionHeading, MonoLabel } from "@/components/ui";
+import { Button } from "@/components/ui";
+import { Reveal } from "@/components/reveal";
 
-const ROWS = [
-  {
-    domain: "Data persistence",
-    impl: "Ephemeral storage destroyed immediately on container termination",
-    value: "Absolute zero-data retention — no negotiation",
-  },
-  {
-    domain: "Network boundary",
-    impl: "All outbound traffic flows through a fixed, high-availability NAT gateway",
-    value: "Static-IP firewall whitelists for BigLaw",
-  },
-  {
-    domain: "Encryption",
-    impl: "TLS 1.3 in transit; AES-256 at rest with customer-managed keys",
-    value: "Federal and state privilege mandates",
-  },
-  {
-    domain: "Model isolation",
-    impl: "Custom LoRA adapters injected into temporary shared-memory volumes",
-    value: "No cross-client leakage on shared infra",
-  },
+type Tone = "signal" | "accent" | "muted";
+
+const ROWS: { control: string; state: string; tone: Tone }[] = [
+  { control: "Session persistence", state: "NONE BY DEFAULT", tone: "signal" },
+  { control: "Training on customer data", state: "DISABLED", tone: "signal" },
+  { control: "Ephemeral execution", state: "ENABLED", tone: "accent" },
+  { control: "Static, controlled egress", state: "ENABLED", tone: "accent" },
+  { control: "Tenant isolation", state: "ENFORCED", tone: "accent" },
+  { control: "Isolation classes", state: "GRADUATED", tone: "muted" },
+  { control: "TLS in transit", state: "1.3", tone: "accent" },
+  { control: "Customer-managed keys", state: "AVAILABLE", tone: "muted" },
+  { control: "Environment teardown", state: "VERIFIED", tone: "signal" },
+  { control: "Audit log", state: "APPEND-ONLY", tone: "accent" },
 ];
+
+function dot(tone: Tone) {
+  return tone === "signal" ? "bg-signal" : tone === "accent" ? "bg-accent" : "bg-faint";
+}
+function text(tone: Tone) {
+  return tone === "signal" ? "text-signal" : tone === "accent" ? "text-accent" : "text-muted";
+}
 
 export function Security() {
   return (
     <section id="security" className="section">
       <Container>
-        <SectionHeading
-          kicker="Security & compliance"
-          title="The checklist your IT auditor will run."
-          lede="Every domain is engineered in from the infrastructure layer — not retrofitted via policy."
-        />
-        <div className="mt-10 overflow-hidden rounded-lg border border-line bg-white">
-          <div className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line bg-bg3 max-[750px]:hidden">
-            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
-              Domain
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <SectionHeading
+              kicker="Security posture"
+              kickerTone="accent"
+              title="Security is a property of the architecture, not a marketing promise."
+              lede="Each control is engineered at the infrastructure layer and enforced in code — not retrofitted through policy language."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="#architecture" variant="ghost">
+                View security architecture
+              </Button>
+              <Button
+                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Security%20review"
+                variant="ghost"
+              >
+                Start security review
+              </Button>
             </div>
-            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
-              Implementation
-            </div>
-            <div className="px-5 py-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-faint">
-              Legal / compliance value
-            </div>
+            <p className="mt-6 max-w-[44ch] font-mono text-[11px] leading-[1.7] text-faint">
+              Zero-retention applies within the boundaries Privileged controls.
+              Persistent workflows are opt-in and customer-configured. No
+              certification is claimed on this page.
+            </p>
           </div>
-          {ROWS.map((row) => (
-            <div
-              key={row.domain}
-              className="grid grid-cols-[1.1fr_1.5fr_1.4fr] border-b border-line text-[13px] last:border-b-0 max-[750px]:grid-cols-1"
-            >
-              <div className="px-5 py-4 max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                <span className="hidden font-mono text-[10.5px] uppercase tracking-[0.06em] text-muted max-[750px]:inline">
-                  {row.domain}:{" "}
-                </span>
-                <span className="font-medium text-ink">{row.domain}</span>
-              </div>
-              <div className="px-5 py-4 text-muted max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                {row.impl}
-              </div>
-              <div className="px-5 py-4 text-accent max-[750px]:px-[18px] max-[750px]:py-[14px]">
-                {row.value}
-              </div>
+
+          <Reveal className="surface-card overflow-hidden">
+            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+              <MonoLabel>Control</MonoLabel>
+              <MonoLabel>Status</MonoLabel>
             </div>
-          ))}
+            <div className="divide-y divide-line">
+              {ROWS.map((r) => (
+                <div
+                  key={r.control}
+                  className="flex items-center justify-between px-5 py-3.5"
+                >
+                  <span className="text-[14px] text-ink">{r.control}</span>
+                  <span className={`inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.1em] ${text(r.tone)}`}>
+                    <span className={`h-1.5 w-1.5 rounded-full ${dot(r.tone)}`} />
+                    {r.state}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </Container>
     </section>
