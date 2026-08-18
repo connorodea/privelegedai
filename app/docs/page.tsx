@@ -136,7 +136,7 @@ export default function Docs() {
               Zero retention applies within the boundaries Privileged controls. Persistent workflows are opt-in. No certification is claimed.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access" arrow>
+              <Button href="/request-access" arrow>
                 Request access
               </Button>
               <Button href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Security%20review" variant="ghost">

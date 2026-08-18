@@ -35,7 +35,7 @@ export function Nav() {
       <div className="bg-bg2 py-2 text-center font-mono text-[11px] tracking-[0.04em] text-muted">
         On-demand ephemeral inference is in early access{" "}
         <a
-          href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+          href="/request-access"
           className="text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:text-ink"
         >
           Request access →
@@ -74,7 +74,7 @@ export function Nav() {
 
           <div className="flex items-center gap-2">
             <Button
-              href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+              href="/request-access"
               className="hidden px-4 py-2 text-[12.5px] sm:inline-flex"
             >
               Request access
@@ -108,7 +108,7 @@ export function Nav() {
                   </Link>
                 ))}
                 <Button
-                  href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+                  href="/request-access"
                   className="mt-2 w-full"
                   arrow
                 >

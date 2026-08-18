@@ -1,0 +1,12 @@
+name = "privileged-inquiry"
+main = "src/index.ts"
+compatibility_date = "2026-08-17"
+
+# Secrets (set via `wrangler secret put`, never committed):
+#   RESEND_KEY  — scoped sending-only Resend API key
+#
+# Vars:
+[vars]
+INQUIRY_TO = "cpodea5@gmail.com"
+INQUIRY_FROM = "Privileged Inquiries <connor@privilegedinfra.com>"
+ALLOWED_ORIGINS = "https://privilegedinfra.com,https://www.privilegedinfra.com,https://privelegedai.com,http://localhost:3000"

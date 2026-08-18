@@ -62,7 +62,7 @@ const FAQS: { q: string; a: ReactNode }[] = [
         Early access is open to a limited set of firms and legal-engineering
         teams. Request access at{" "}
         <a
-          href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+          href="/request-access"
           className="text-accent hover:underline"
         >
           hello@privilegedinfra.com

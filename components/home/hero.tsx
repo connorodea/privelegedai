@@ -79,7 +79,7 @@ export function Hero() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button
-                href="mailto:hello@privilegedinfra.com?subject=Privileged%20—%20Request%20access"
+                href="/request-access"
                 arrow
               >
                 Request access
